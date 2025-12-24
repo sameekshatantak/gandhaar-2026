@@ -5,9 +5,10 @@
 	padding: 0;
 }
 body {
+	background: #cbb;
 	height: 100vh;
     width: 100%;
-    margin: 0;
+      margin: 0;
     padding: 0;
 }
 
