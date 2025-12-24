@@ -1,10 +1,12 @@
 import "../style/Home.css";
 import AboutUs from "./AboutUs";
+import DevTeam from "./DevTeam";
 import Event from "./Event";
 import Footer from "./Footer";
 import GandhaarTheme from "./GandhaarTheme";
 import Header from "./Header";
 import ImageGallery from "./ImageGallery";
+import Panel from "./Panel";
 import Schedule from "./Schedule";
 import StarLineUp from "./StarLineUp";
 
@@ -18,11 +20,13 @@ function Home() {
       <Schedule/>
       <AboutUs/>
       <ImageGallery/>
+      <Panel/>
+      <DevTeam/>
       <br></br>
       <br></br>
       <br></br>
       <br></br>
-      <Footer/>
+     <Footer/>
     </div>
   );
 }
