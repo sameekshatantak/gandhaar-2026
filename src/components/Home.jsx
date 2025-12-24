@@ -1,15 +1,9 @@
 import "../style/Home.css";
 
 import Footer from "./Footer";
-
-import Header from "./Header";
-
-
 function Home() {
   return (
     <div>
-      <Header/>
-     
       <Footer/>
     </div>
   );
