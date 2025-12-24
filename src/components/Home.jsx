@@ -1,12 +1,28 @@
+import "../style/Home.css";
+import AboutUs from "./AboutUs";
+import Event from "./Event";
 import Footer from "./Footer";
-import Theme from "./Theme";
+import GandhaarTheme from "./GandhaarTheme";
+import Header from "./Header";
+import ImageGallery from "./ImageGallery";
+import Schedule from "./Schedule";
+import StarLineUp from "./StarLineUp";
 
 function Home() {
   return (
     <div>
-      <Theme />
+      <Header/>
+      <GandhaarTheme/>
+      <Event/>
+      <StarLineUp/>
+      <Schedule/>
+      <AboutUs/>
+      <ImageGallery/>
       <br></br>
-      <Footer/>
+      <br></br>
+      <br></br>
+      <br></br>
+     <Footer/>
     </div>
   );
 }
