@@ -1,9 +1,15 @@
 import "../style/Home.css";
 import Footer from "./Footer";
+import GandhaarTheme from "./GandhaarTheme";
 function Home() {
   return (
     <div>
-      <h1>hello</h1>
+      <GandhaarTheme/>
+      <br></br>
+     
+      <br></br>
+      <br></br>
+
       <Footer/>
     </div>
   );
