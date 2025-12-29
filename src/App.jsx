@@ -1,3 +1,4 @@
+
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home";
@@ -14,4 +15,3 @@ function App() {
 }
 
 export default App;
-
