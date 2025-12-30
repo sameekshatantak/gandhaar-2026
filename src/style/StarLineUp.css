@@ -1,0 +1,190 @@
+/* Container and Layout */
+.star-reveal-container {
+    background: #050505;
+    color: white;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+@font-face {
+    font-family: 'Quinlliyk';
+    src: url('../assets/fonts/QuinlliykRegular-gx3ME.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Quinlliyk', sans-serif;
+}
+
+
+.reveal-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px;
+}
+
+/* Theatre Stage Styling */
+.theatre-stage {
+    position: relative;
+    width: 90vw;
+    max-width: 1000px;
+    height: 90vh;
+    background: #000;
+    margin: 20px 0;
+    border: 3px solid #d4af37;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+.stage-img {
+    position: absolute;
+    height: 90%;
+    width: auto;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+/* Curtain Styling */
+.curtain-panel {
+    position: absolute;
+    top: 0;
+    width: 50.5%;
+    /* Slight overlap to prevent a gap in the middle */
+    height: 100%;
+    background: linear-gradient(to right, #400, #b00 20%, #800 50%, #b00 80%, #400);
+    background-size: 60px 100%;
+    z-index: 10;
+    transition: transform 1.2s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    box-shadow: inset 0 0 40px #000;
+}
+
+.curtain-left {
+    left: 0;
+    border-right: 2px solid rgba(0, 0, 0, 0.5);
+}
+
+.curtain-right {
+    right: 0;
+    border-left: 2px solid rgba(0, 0, 0, 0.5);
+}
+
+/* Typography */
+.gold-text {
+    color: #d4af37;
+    font-family: 'Quinlliyk', sans-serif;
+    font-size: clamp(4rem, 8vw, 6rem);
+    margin: 0;
+}
+
+.gold-subtitle {
+    font-family: 'Quinlliyk', sans-serif;
+    color: #d4af37;
+    font-size: 5rem;
+    opacity: 0.8;
+}
+
+.scroll-hint {
+    color: #d4af37;
+    animation: bounce 2s infinite;
+    font-weight: bold;
+}
+
+/* Quiz Styling */
+.quiz-section {
+    padding: 50px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.quiz-card {
+    background: #111;
+    border: 1px solid #d4af37;
+    padding: 20px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.progress-bar {
+    color: #d4af37;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    letter-spacing: 8px;
+}
+
+.option-btn {
+    width: 100%;
+    padding: 14px;
+    margin: 8px 0;
+    background: #1a1a1a;
+    color: white;
+    border: 1px solid #333;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.option-btn:hover {
+    background: #222;
+    border-color: #d4af37;
+}
+
+.option-btn:active {
+    background: #d4af37;
+    color: black;
+}
+
+/* Animations */
+.reveal-fade-in {
+    animation: smoothReveal 2s ease-out forwards;
+}
+
+@keyframes smoothReveal {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.8);
+        filter: blur(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+        filter: blur(0);
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.celebration-text {
+    color: #d4af37;
+    font-size: 2rem;
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px #d4af37;
+    }
+
+    to {
+        text-shadow: 0 0 30px #fff;
+    }
+}

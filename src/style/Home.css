@@ -1,8 +1,10 @@
+@font-face {
+    font-family: 'Quinlliyk';
+    src: url('fonts/Quinlliyk-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
-  margin: 0;
-  min-height: 100vh;
-  background-image: url("../images/bg.png");
-  background-repeat: repeat-y;
-  background-size: 100% 100vh;
-  background-position: top center;
+    font-family: 'Quinlliyk', sans-serif;
 }
