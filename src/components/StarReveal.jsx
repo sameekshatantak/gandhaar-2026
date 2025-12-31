@@ -88,10 +88,6 @@ function StarReveal() {
       font-weight: normal;
       font-style: normal;
     }
-
-    body {
-      font-family: 'Quinlliyk', sans-serif;
-    }
   `}
 </style>
 

@@ -14,25 +14,25 @@ function Home() {
   return (
     <div>
       {/* Hero / Theme */}
-      <GrainWrapper bgColor="#b5422e">
+      <GrainWrapper bgColor="#f57f5b">
         <GandhaarTheme />
       </GrainWrapper>
 
       {/* Star Reveal */}
-      <GrainWrapper bgColor="#f1e7c6">
+      <GrainWrapper bgColor="#dd5341">
         <StarReveal />
       </GrainWrapper>
 
             {/* Star Lineup */}
-      <GrainWrapper bgColor="#050505">
+      <GrainWrapper bgColor="#794a3a">
         <StarLineUp />
       </GrainWrapper>
 
-
       {/* About */}
-      <GrainWrapper bgColor="#0F171E">
+      <GrainWrapper bgColor="#1E1A16">
         <AboutUs />
       </GrainWrapper>
+
 
       {/* Cultural Panel */}
       <GrainWrapper bgColor="#3c6e6a">

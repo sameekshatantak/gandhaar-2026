@@ -1,6 +1,5 @@
 /* Container and Layout */
 .star-reveal-container {
-    background: #050505;
     color: white;
     min-height: 100vh;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -12,9 +11,6 @@
     font-style: normal;
 }
 
-body {
-    font-family: 'Quinlliyk', sans-serif;
-}
 
 
 .reveal-section {

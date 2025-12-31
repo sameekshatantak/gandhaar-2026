@@ -1,5 +1,4 @@
 :root {
-    --dark-bg: #0F171E;
     --gandhaar-orange: #FF9900;
 }
 
@@ -8,10 +7,6 @@
     src: url('../assets/fonts/QuinlliykRegular-gx3ME.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-}
-
-body {
-    font-family: 'Quinlliyk', sans-serif;
 }
 
 
