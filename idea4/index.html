@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gandhar 2026</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="homepage-container">
+  <div class="vintage-tv">
+
+    <div class="tv-screen-frame off" id="tvScreen">
+      <div class="tv-screen-content" id="screenContent"></div>
+
+      <div class="tv-overlay-text">
+        <div class="fest-name" id="themeTitle">
+          Gandhar 2026
+        </div>
+        <div class="college-name" id="themeSubtitle">
+          Presented by MKSSS's Cummins College of Engineering for Women, Pune
+        </div>
+      </div>
+
+      <div class="tv-noise"></div>
+    </div>
+
+    <div class="tv-ui">
+      <div class="tv-knobs">
+
+        <div class="knob-wrapper">
+          <div class="knob-label">CH</div>
+          <svg class="knob" id="channelKnob" viewBox="0 0 50 50">
+            <circle cx="25" cy="25" r="23" fill="#aaa" stroke="#777" stroke-width="2.5"/>
+            <circle cx="35" cy="15" r="5" fill="#333"/>
+            <defs>
+              <radialGradient id="knob-shine">
+                <stop offset="0%" stop-color="rgba(255,255,255,0.4)"/>
+                <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+              </radialGradient>
+            </defs>
+            <circle cx="25" cy="25" r="23" fill="url(#knob-shine)"/>
+          </svg>
+        </div>
+
+        <div class="knob-wrapper">
+          <div class="knob-label">VOL</div>
+          <svg class="knob" viewBox="0 0 50 50">
+            <circle cx="25" cy="25" r="23" fill="#aaa" stroke="#777" stroke-width="2.5"/>
+            <circle cx="35" cy="15" r="5" fill="#333"/>
+            <circle cx="25" cy="25" r="23" fill="url(#knob-shine)"/>
+          </svg>
+        </div>
+
+      </div>
+
+      <div class="tv-speaker-grill"></div>
+    </div>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

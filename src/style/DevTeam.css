@@ -1,0 +1,104 @@
+.dev-viewport {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    background-color: #000 !important;
+    overflow: hidden;
+}
+
+/* FIXED HEADER: Solid black box that hides text as it scrolls up */
+.fixed-header-curtain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 220px;
+    background-color: #000;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dev-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5.5rem;
+    font-weight: bold;
+    letter-spacing: 12px;
+    color: #d4af37;
+    margin: 0;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+/* THE SCROLLING TRACK: Continuous Loop */
+.credits-track {
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    animation: fastLoop 25s linear infinite !important;
+    text-align: center;
+    z-index: 10;
+}
+
+@keyframes fastLoop {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        /* Adjusting this value restarts the loop sooner. 
+           -120% means it resets shortly after the last name 
+           passes the top of the screen. */
+        transform: translateY(-120%);
+    }
+}
+
+/* 2 COLUMN GRID */
+.team-credits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 80px 40px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.dev-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dev-member img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #d4af37;
+    margin-bottom: 15px;
+}
+
+.dev-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    color: #fff;
+    letter-spacing: 2px;
+}
+
+.dev-member:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+.dev-member:hover .dev-name {
+    color: #d4af37;
+}
+
+.dev-footer-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: #333;
+    /* Darker grey to stay subtle */
+    margin-top: 150px;
+    padding-bottom: 100px;
+}

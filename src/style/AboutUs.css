@@ -1,0 +1,236 @@
+:root {
+    --dark-bg: #0F171E;
+    --gandhaar-orange: #FF9900;
+}
+
+@font-face {
+    font-family: 'Quinlliyk';
+    src: url('../assets/fonts/QuinlliykRegular-gx3ME.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Quinlliyk', sans-serif;
+}
+
+
+.about-page-wrapper {
+    background-color: var(--dark-bg);
+    width: 100%;
+    position: relative;
+    min-height: 100vh;
+}
+
+.movie-detail-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 6%;
+    min-height: 100vh;
+}
+
+/* CONTENT ALIGNMENT */
+.content-container {
+    flex: 2.5px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+}
+
+
+.text-wrapper {
+    max-width: 1200px; /* increase from 650px */
+    width: 100%;
+    text-align: justify; /* optional for better readability */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* optional: align text to left */
+}
+
+
+/* LOGO TITLE & UNDERLINE */
+.gandhaar-kurale {
+    font-family: 'Pinyon Script', cursive;
+    color: var(--gandhaar-orange);
+    font-size: 5.5rem;
+    margin: 0;
+    margin-bottom: 25px;
+    position: relative;
+    text-transform: lowercase;
+}
+
+.gandhaar-kurale::after {
+    content: "";
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    height: 2px;
+    background: var(--gandhaar-orange);
+    box-shadow: 0 0 10px var(--gandhaar-orange);
+    width: 0;
+    animation: underlineGrow 1.5s ease-out forwards;
+    animation-delay: 0.5s;
+}
+
+@keyframes underlineGrow {
+    to {
+        width: 100%;
+    }
+}
+
+.about-us-title {
+    color: #d4af37;
+    font-family: 'Quinlliyk', sans-serif;
+    font-size: clamp(4rem, 8vw, 6rem);
+    margin: 0;
+
+}
+
+.meta-data {
+    display: flex;
+    gap: 15px;
+    color: #8197a4;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* BUTTONS */
+.prime-action-bar {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.play-btn {
+    background: white;
+    color: black;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.circle-outline,
+.share-pill-outline {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+}
+
+.circle-outline:hover,
+.share-pill-outline:hover {
+    border-color: #add8e6;
+    color: #add8e6;
+    box-shadow: 0 0 10px rgba(173, 216, 230, 0.3);
+}
+
+.circle-outline {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+}
+
+.share-pill-outline {
+    padding: 0 20px;
+    border-radius: 25px;
+    height: 48px;
+}
+
+.liked-glow {
+    border-color: var(--gandhaar-orange) !important;
+    box-shadow: 0 0 20px var(--gandhaar-orange) !important;
+    background: rgba(255, 153, 0, 0.1) !important;
+}
+
+.prime-description {
+    color: #cccccc;
+    font-size: 1.5rem;
+    width: 100%;  /* take full width of parent */
+    text-align: justify;
+}
+
+
+/* SIDE IMAGE */
+.backdrop-container {
+    flex: 0.8;
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+
+.side-fit-image {
+    width: 502px;
+    height: auto;
+    opacity: 0.8;
+    mask-image: linear-gradient(to left, black 60%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to left, black 60%, transparent 100%);
+}
+
+
+
+/* THE OVERLAY (Full Screen) */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+/* THE POPUP BOX (Medium Sized) */
+.modal-content {
+    position: relative;
+    width: 70%;
+    max-width: 900px;
+    background: #000;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+/* RESPONSIVE VIDEO CONTAINER */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+    position: absolute;
+    top: -5px;
+    right: 10px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2001;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: var(--gandhaar-orange);
+}
