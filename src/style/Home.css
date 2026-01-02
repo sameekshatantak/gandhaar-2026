@@ -1,8 +1,14 @@
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  width: 100%;
   min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body {
   background-image: url("../images/bg.png");
   background-repeat: repeat-y;
-  background-size: 100% 100vh;
-  background-position: top center;
+  background-size: cover;       /* ✅ FIX */
+  background-position: center top;
 }
