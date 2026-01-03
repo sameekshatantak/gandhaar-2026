@@ -1,0 +1,72 @@
+.remote-body {
+    width: 120px;
+    height: 380px;
+    background: #1a1a1a;
+    border-radius: 20px;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.7),
+        inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+    border: 1px solid #333;
+}
+
+.remote-sensor {
+    width: 30px;
+    height: 5px;
+    background: #440000;
+    border-radius: 5px;
+}
+
+.remote-power {
+    width: 25px;
+    height: 25px;
+    background: #d32f2f;
+    border-radius: 50%;
+    border: 2px solid #b71c1c;
+    cursor: pointer;
+}
+
+.remote-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.remote-num-btn {
+    width: 28px;
+    height: 28px;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 0 #000;
+}
+
+.remote-rockers {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.rocker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #222;
+    padding: 5px;
+    border-radius: 10px;
+    color: #888;
+    font-size: 10px;
+}
+
+.remote-brand {
+    margin-top: auto;
+    font-size: 8px;
+    color: #444;
+    letter-spacing: 2px;
+}
