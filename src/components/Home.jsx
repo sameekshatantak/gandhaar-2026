@@ -1,12 +1,18 @@
 import "../style/Home.css";
+import "../style/Theme.css";
 
 import headerimage from "../assets/images/header_image.png";
+
+/* social icons */
+import instagramIcon from "../assets/images/instagram.png";
+import mailIcon from "../assets/images/mail.png";
+
 import GrainWrapper from "../components/GrainWrapper";
 import AboutUs from "./AboutUs";
 import Carousel from "./Carousel";
 import CulturalPanel from "./CulturalPanel";
 import DevTeam from "./DevTeam";
-import Footer from "./Footer";
+
 import GandhaarTheme from "./GandhaarTheme";
 import Header from "./Header";
 import Navbar from "./Navbar";
@@ -15,63 +21,94 @@ import StarReveal from "./StarReveal";
 
 function Home() {
   return (
-    <div id="home">
-      <Navbar />
-      
-      <Header
-  bgImage={headerimage}
-
-/>
-      {/* Hero / Theme */}
-      <div id="themes">
-        <GrainWrapper bgColor="#f57f5b">
-          <GandhaarTheme />
-        </GrainWrapper>
+    <div className="main-container">
+      {/* Remote / Navbar */}
+      <div className="remote-area">
+        <Navbar />
       </div>
 
-      {/* Star Reveal */}
-      <div id="events">
-        <GrainWrapper bgColor="#dd5341">
-          <StarReveal />
-        </GrainWrapper>
-      </div>
+      {/* 📺 TV BODY (UNCHANGED) */}
+      <div className="tv-wrapper">
+        {/* SCREEN */}
+        <div className="screen-container">
+          <div className="crt-overlay"></div>
 
-      {/* Star Lineup */}
-      <div id="lineup">
-        <GrainWrapper bgColor="#794a3a">
-          <StarLineUp />
-        </GrainWrapper>
-      </div>
+          {/* 🔹 TOP CENTER BOX */}
+          <div className="tv-center-box tv-top-box">
+            <span className="tv-title">GANDHAAR 2026</span>
+          </div>
 
-      {/* About */}
-      <div id="about">
-        <GrainWrapper bgColor="#1E1A16">
-          <AboutUs />
-        </GrainWrapper>
-      </div>
+          {/* 📡 BROADCAST CONTENT */}
+          <div className="broadcast-content" id="home">
+            <Header bgImage={headerimage} />
 
-      {/* Carousel */}
-      <div id="schedule">
-        <GrainWrapper bgColor="#68c7c1">
-          <Carousel />
-        </GrainWrapper>
-      </div>
+            <GrainWrapper bgColor="#f57f5b">
+              <GandhaarTheme />
+            </GrainWrapper>
 
-      {/* Cultural Panel */}
-      <div id="cultural">
-        <GrainWrapper bgColor="#3c6e6a">
-          <CulturalPanel />
-        </GrainWrapper>
-      </div>
+            <GrainWrapper bgColor="#dd5341">
+              <StarReveal />
+            </GrainWrapper>
 
-      {/* Dev Team */}
-      <div id="team">
-        <GrainWrapper bgColor="#6b7a3c">
-          <DevTeam />
-        </GrainWrapper>
-      </div>
+            <GrainWrapper bgColor="#794a3a">
+              <StarLineUp />
+            </GrainWrapper>
 
-      <Footer />
+            <GrainWrapper bgColor="#1E1A16">
+              <AboutUs />
+            </GrainWrapper>
+
+            <GrainWrapper bgColor="#68c7c1">
+              <Carousel />
+            </GrainWrapper>
+
+            <GrainWrapper bgColor="#3c6e6a">
+              <CulturalPanel />
+            </GrainWrapper>
+
+            <GrainWrapper bgColor="#6b7a3c">
+              <DevTeam />
+            </GrainWrapper>
+
+          </div>
+        </div>
+
+        {/* 🔘 CONTROLS + FOOTER STRIP */}
+        <div className="controls-container">
+
+          {/* FOOTER BOX */}
+          <div className="tv-footer-box">
+            <span className="footer-text">
+             <span className="footer-line-1">
+      MKSSS Cummins College of Engineering for Women
+    </span>
+    <span className="footer-line-2">
+      Karve Nagar, Pune – 411-052
+    </span>
+            </span>
+
+            <div className="footer-icons">
+              <a
+                href="https://www.instagram.com/gandhaar_cummins/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src={instagramIcon} alt="Instagram" />
+              </a>
+
+
+              <a href="mailto:gandhaar@cumminscollege.in">
+                <img src={mailIcon} alt="Email" />
+              </a>
+             
+
+            </div>
+          
+          </div>
+            
+
+        </div>
+      </div>
     </div>
   );
 }

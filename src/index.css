@@ -1,10 +1,31 @@
-html, body {
+/* index.css */
+:root {
+  background-color: #000;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html,
+#root {
   margin: 0;
   padding: 0;
   width: 100%;
-  overflow-x: hidden;  /* kills accidental overflow */
+  height: 100%;
+  background-color: #000;
+  /* On laptop, this is hidden by main-container. On mobile, auto allows stacking. */
+  overflow: hidden;
 }
 
-#root {
-  width: 100%;
+@media (max-width: 768px) {
+
+  body,
+  html {
+    overflow: auto;
+    /* Allow scrolling between TV and Remote if they overflow */
+  }
 }

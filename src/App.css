@@ -1,10 +1,14 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  overflow-x: hidden;  /* kills accidental overflow */
+/* App.css */
+#root {
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
 }
 
-#root {
+.App {
   width: 100%;
+  height: 100%;
 }
