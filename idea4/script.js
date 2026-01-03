@@ -1,26 +1,20 @@
 /* THEME DATA (with audio) */
 const themes = [
   {
-    image: "assets/images/1000097835.jpg",
-    audio: "assets/audio/day1.mp3"
+    image: "assets/images/day1.jpg",
+    audio: "assets/audio/day1.mpeg"
   },
   {
-    image: "assets/images/1000097034.jpg",
+    image: "assets/images/day2.jpg",
     audio: "assets/audio/day2.mp3"
   },
   {
-    title: "Episode 3: Desi Sitcoms",
-    subtitle:
-      "It’s peak prime time as beloved Indian sitcom characters return to the screen, bringing laughter, charm, and iconic looks straight from the living room to the stage.",
-    image: "assets/images/1000095902.jpg",
-    audio: "assets/audio/day3.mp3"
+    image: "assets/images/day3.png",
+    audio: "assets/audio/day3.mpeg"
   },
   {
-    title: "Episode 4: Desi Darshan",
-    subtitle:
-      "The grand finale celebrates India’s cultural broadcast, where traditional sarees and ethnic elegance take center stage, inspired by desi television and timeless heritage.",
-    image: "assets/images/1000095903.jpg",
-    audio: "assets/audio/day4.mp3"
+    image: "assets/images/day4.png",
+    audio: "assets/audio/day4.mpeg"
   }
 ];
 
