@@ -1,0 +1,7 @@
+.header-image-only {
+  width: 100%;
+  background-size: contain;   /* 👈 key change */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #805d4f;     /* fills empty space if aspect ratio differs */
+}
