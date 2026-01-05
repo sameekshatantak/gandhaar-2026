@@ -1,8 +1,7 @@
 .grain-wrapper {
   position: relative;
   width: 100%;
-  min-height: 100vh;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .grain-noise {
@@ -10,14 +9,11 @@
   inset: 0;
   z-index: 5;
   pointer-events: none;
-
   background-image: url("http://assets.iceable.com/img/noise-transparent.png");
   background-repeat: repeat;
-
-  opacity: 0.6;      /* VERY HIGH ON PURPOSE */
+  opacity: 0.6;
 }
 
-/* content above noise */
 .grain-inner {
   position: relative;
   z-index: 2;

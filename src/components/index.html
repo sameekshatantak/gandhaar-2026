@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gandhaar 2026</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="homepage-container">
+  <!-- TITLE ABOVE TV -->
+  <h1 class="gandhaar-title">Gandhaar Themes</h1>
+
+  <!-- TV -->
+  <div class="vintage-tv">
+
+    <div class="tv-screen-frame off" id="tvScreen">
+      <div class="tv-screen-content" id="screenContent"></div>
+
+      <!-- TEXT ON TV SCREEN -->
+      <div class="tv-overlay-text show">
+        <div class="fest-name" id="themeTitle"></div>
+        <div class="college-name" id="themeSubtitle"></div>
+      </div>
+
+      <div class="tv-noise"></div>
+    </div>
+
+    <!-- TV UI -->
+    <div class="tv-ui">
+      <div class="tv-knobs">
+
+        <!-- CHANNEL -->
+        <div class="knob-wrapper">
+          <div class="knob-label">CH</div>
+          <svg class="knob" id="channelKnob" viewBox="0 0 50 50">
+            <circle cx="25" cy="25" r="23" fill="#aaa" stroke="#777" stroke-width="2.5"/>
+            <circle cx="35" cy="15" r="5" fill="#333"/>
+          </svg>
+        </div>
+
+        <!-- VOLUME -->
+        <div class="knob-wrapper">
+          <div class="knob-label">VOL</div>
+          <svg class="knob" id="volumeKnob" viewBox="0 0 50 50">
+            <circle cx="25" cy="25" r="23" fill="#aaa" stroke="#777" stroke-width="2.5"/>
+            <circle cx="35" cy="15" r="5" fill="#333"/>
+          </svg>
+          <div class="click-hint">CLICK HERE</div>
+        </div>
+
+      </div>
+
+      <div class="tv-speaker-grill"></div>
+    </div>
+
+  </div>
+  <!-- SET TOP BOX -->
+<div class="set-top-box">
+  <div class="stb-lights">
+    <span class="stb-light red"></span>
+    <span class="stb-light yellow"></span>
+  </div>
+
+  <a href="/events" class="stb-cta">CTV</a>
+</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

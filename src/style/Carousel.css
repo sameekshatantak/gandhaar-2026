@@ -18,27 +18,35 @@
     0 0 20px rgba(212,175,55,0.35);
 }
 
+.carousel-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+
 
 :root {
-
 		--carousel-transition-duration: 250ms;
 		--carousel-transition-ease: ease-out;
 		--carousel-bg-color-rgb: 0, 0, 0;
 		--carousel-shadow-color-rgb: 128, 128, 128;
-		--carousel-item-width: 18rem;
-		--carousel-item-height: 30rem;
+		--carousel-item-width: 11.5rem;
+		--carousel-item-height: 17.5rem;
 		--carousel-item-hover-effect: 1.075;
 		--carousel-item-reflection-blur: 0.25rem;
 		--carousel-item-empty-color-rgb: 255, 255, 255;
 		--carousel-item-glow-color-rgb: 255, 255, 255;
 		--carousel-item-glow-size: 5rem;
-		--carousel-diameter: 75rem;
+		--carousel-diameter: 50rem;
 		--carousel-3d-perspective: 1000px;
 		--carousel-3d-perspective-origin: 50% 20%;
 		--carousel-control-button-width: 1.25rem;
 		--carousel-control-button-height: 4rem;
 		--carousel-control-color-rgb: 255, 255, 255;
-		--carousel-animation-duration: 50s;
+		--carousel-animation-duration: 25s;
 		--carousel-animation-play-state: running;
 		--carousel-direction-animation-play-state: paused;
 }
@@ -67,12 +75,20 @@ a {
 		user-select: none;
 }
 
-
+/*body {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100vh;
+		background-color: rgb(var(--carousel-bg-color-rgb));
+		overflow: hidden;
+}*/
 
 /*
 carousel
 */
 .carousel {
+		
 		--_diameter: var(--carousel-diameter);
 		--_radius: calc(var(--_diameter) / 2);
 		--_item-width: var(--carousel-item-width);
@@ -482,11 +498,16 @@ carousel
 /* =========================
    MOBILE VIEW
 ========================= */
+
 .carousel-page.mobile {
-  --radius: 240px;
-  --item-width: 160px;
-  --item-height: 110px;
-  --perspective: 800px;
+  --radius: 30vw;
+  --item-width: 36vw;
+  --item-height: 52vw;
+  --perspective: 650px;
+}
+.carousel-page.mobile {
+  padding-left: 6vw;
+  padding-right: 6vw;
 }
 
 /* Apply variables */
@@ -498,6 +519,18 @@ carousel
   width: var(--item-width);
   height: var(--item-height);
 }
+
+.carousel-page.mobile .carousel {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%) scale(0.85);
+  transform-origin: center center;
+}
+.carousel-rotation-direction {
+  will-change: transform;
+}
+
+
 
 /* Smoother animation for mobile */
 .carousel-page.mobile .carousel-item-wrapper {
@@ -559,4 +592,32 @@ carousel
   }
 }
 
+@media (max-width: 380px) {
+  .carousel-page.mobile .carousel {
+    transform: scale(0.78);
+  }
+}
+
+/* =========================================================
+   MOBILE STABILIZATION FIX (ADDITIVE ONLY)
+   DOES NOT MODIFY EXISTING RULES
+   ========================================================= */
+
+.carousel-stabilizer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  contain: layout paint;
+}
+
+.carousel-stabilizer .carousel {
+  translate: 0 0;
+  transform: translateZ(0);
+}
+
+@media (max-width: 768px) {
+  .carousel-stabilizer {
+    overflow: hidden;
+  }
+}
 

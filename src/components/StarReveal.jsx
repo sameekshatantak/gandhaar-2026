@@ -1,257 +1,294 @@
-import { useState } from "react";
-import QuinlliykFont from '../assets/fonts/QuinlliykRegular-gx3ME.ttf';
-import starImg from "../assets/star.jpg";
-
-
-import story1 from "../assets/stories/story1.jpg";
-import story10 from "../assets/stories/story10.jpg";
-import story11 from "../assets/stories/story11.jpg";
-import story12 from "../assets/stories/story12.jpg";
-import story13 from "../assets/stories/story13.jpg";
-import story14 from "../assets/stories/story14.jpg";
-import story15 from "../assets/stories/story15.jpg";
-import story16 from "../assets/stories/story16.jpg";
-import story17 from "../assets/stories/story17.jpg";
-import story18 from "../assets/stories/story18.jpg";
-import story19 from "../assets/stories/story19.jpg";
-import story2 from "../assets/stories/story2.jpg";
-import story20 from "../assets/stories/story20.jpg";
-import story3 from "../assets/stories/story3.jpg";
-import story4 from "../assets/stories/story4.jpg";
-import story5 from "../assets/stories/story5.jpg";
-import story6 from "../assets/stories/story6.jpg";
-import story7 from "../assets/stories/story7.jpg";
-import story8 from "../assets/stories/story8.jpg";
-import story9 from "../assets/stories/story9.jpg";
-
-function StarReveal() {
-
-  // 🔹 YOU manually control reveal
-  const [currentStories] = useState(50);
-
-  // 🔹 Total needed for 100% reveal
-  const totalStoriesForFullReveal = 200;
-
-  // 🔹 Percentage calculation
-  const revealPercent = Math.min(
-    (currentStories / totalStoriesForFullReveal) * 100,
-    95
-  );
-
-  // 🔹 Blur logic
-  const maxBlur = 20;
-  const blurValue = maxBlur - (maxBlur * revealPercent) / 100;
-
-  // 🔹 Stories data
-  const stories = [
-    { img: story1, username: "user1" },
-    { img: story2, username: "user2" },
-    { img: story3, username: "user3" },
-    { img: story4, username: "user4" },
-    { img: story5, username: "user5" },
-    { img: story6, username: "user6" },
-    { img: story7, username: "user7" },
-    { img: story8, username: "user8" },
-    { img: story9, username: "user9" },
-    { img: story10, username: "user10" },
-    { img: story11, username: "user11" },
-    { img: story12, username: "user12" },
-    { img: story13, username: "user13" },
-    { img: story14, username: "user14" },
-    { img: story15, username: "user15" },
-    { img: story16, username: "user16" },
-    { img: story17, username: "user17" },
-    { img: story18, username: "user18" },
-    { img: story19, username: "user19" },
-    { img: story20, username: "user20" }
+import { useCallback, useEffect, useRef, useState } from 'react';
+import comingSoonImage from '../assets/images/coming-soon.png';
+import "../style/StarReveal.css";
+/* =======================
+   Confetti Component
+======================= */
+const Confetti = () => {
+  const colors = [
+    'hsl(38, 90%, 50%)',
+    'hsl(0, 80%, 60%)',
+    'hsl(200, 80%, 60%)',
+    'hsl(120, 60%, 50%)',
+    'hsl(45, 85%, 55%)',
+    'hsl(280, 70%, 60%)'
   ];
 
+  const confettiPieces = Array.from({ length: 50 }, (_, i) => ({
+    id: i,
+    left: Math.random() * 100,
+    delay: Math.random() * 2,
+    duration: 2 + Math.random() * 2,
+    color: colors[Math.floor(Math.random() * colors.length)],
+    size: 6 + Math.random() * 8,
+    rotation: Math.random() * 360,
+  }));
+
   return (
-    <div
-      style={
-        {
-        minHeight: "100vh",
-        color: "#ffffff",
-        padding: "30px 15px",
-        fontFamily: "'Permanent Marker', cursive",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center"
-      }}
-    >
-      {/* Google Font */}
-      <style>
-  {`
-    @font-face {
-      font-family: 'Quinlliyk';
-      src: url('${QuinlliykFont}') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-    }
-  `}
-</style>
-
-
-      {/* Heading */}
-<h1
-  style={{
-    fontFamily: 'Quinlliyk, sans-serif',
-    fontSize: "clamp(4rem, 8vw, 6rem)",
-    color: "#d4af37",
-    letterSpacing: "2px",
-    marginBottom: "5px"
-  }}
->
-  THE GRAND REVEAL
-</h1>
-
-
-      <h3
-        style={{
-          fontFamily: 'Quinlliyk, sans-serif',
-          fontSize: "5rem",
-          color: "#d4af37",
-          letterSpacing: "2px",
-          marginBottom: "5px",
-        }}
-      >
-        Star Night 1
-      </h3>
-
-      {/* TV Frame */}
-      <div
-        style={{
-          width: "85%",
-          maxWidth: "1100px",
-          background: "#111",
-          borderRadius: "30px",
-          padding: "20px",
-          boxShadow: "0 0 40px rgba(255, 140, 0, 0.35)",
-          position: "relative",
-          marginBottom: "10px"
-        }}
-      >
-        {/* TV Screen */}
-        <div
+    <div className="confetti-container">
+      {confettiPieces.map(piece => (
+        <span
+          key={piece.id}
+          className="confetti"
           style={{
-            background: "#000",
-            borderRadius: "20px",
-            overflow: "hidden",
-            border: "4px solid #222"
-          }}
-        >
-          <img
-            src={starImg}
-            alt="Star"
-            style={{
-              width: "100%",
-              display: "block",
-              filter: `blur(${blurValue}px)`,
-              transition: "filter 0.6s ease"
-            }}
-          />
-        </div>
-
-        {/* Speaker Dots */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: "8px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            display: "flex",
-            gap: "6px"
-          }}
-        >
-          {Array.from({ length: 6 }).map((_, i) => (
-            <span
-              key={i}
-              style={{
-                width: "6px",
-                height: "6px",
-                background: "#444",
-                borderRadius: "50%"
-              }}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* TV Stand */}
-      <div
-        style={{
-          width: "140px",
-          height: "10px",
-          background: "#222",
-          borderRadius: "0 0 12px 12px",
-          marginBottom: "25px"
-        }}
-      />
-
-      {/* Progress Bar */}
-      <div
-        style={{
-          width: "90%",
-          maxWidth: "420px",
-          height: "12px",
-          background: "rgba(255,255,255,0.2)",
-          borderRadius: "20px",
-          overflow: "hidden"
-        }}
-      >
-        <div
-          style={{
-            width: `${revealPercent}%`,
-            height: "100%",
-            background: "linear-gradient(90deg, #ff9800, #ff5722)",
-            transition: "width 0.6s ease"
+            left: `${piece.left}%`,
+            width: `${piece.size}px`,
+            height: `${piece.size * 1.5}px`,
+            backgroundColor: piece.color,
+            animationDelay: `${piece.delay}s`,
+            animationDuration: `${piece.duration}s`,
+            transform: `rotate(${piece.rotation}deg)`,
+            borderRadius: Math.random() > 0.5 ? '50%' : '2px',
           }}
         />
-      </div>
-
-      <p style={{ marginTop: "10px", letterSpacing: "1px" }}>
-        🔓 Reveal Progress: {Math.floor(revealPercent)}%
-      </p>
-
-      {/* Stories Section */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(70px, 1fr))",
-          gap: "15px",
-          width: "100%",
-          maxWidth: "420px",
-          marginTop: "30px"
-        }}
-      >
-        {stories.map((story, index) => (
-          <div key={index} style={{ textAlign: "center" }}>
-            <img
-              src={story.img}
-              alt="story"
-              style={{
-                width: "70px",
-                height: "70px",
-                objectFit: "cover",
-                borderRadius: "12px",
-                border: "2px solid rgba(255,255,255,0.3)"
-              }}
-            />
-            <p
-              style={{
-                fontSize: "11px",
-                marginTop: "6px",
-                letterSpacing: "0.5px"
-              }}
-            >
-              @{story.username}
-            </p>
-          </div>
-        ))}
-      </div>
-
+      ))}
     </div>
   );
-}
+};
+
+/* =======================
+   NoiseCanvas Component
+======================= */
+const NoiseCanvas = ({ width, height, opacity = 0.15, className = '' }) => {
+  const canvasRef = useRef(null);
+  const animationRef = useRef();
+
+  const generateNoise = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const imageData = ctx.createImageData(width, height);
+    const data = imageData.data;
+    const opacityValue = Math.floor(opacity * 255);
+
+    for (let i = 0; i < data.length; i += 4) {
+      const gray = Math.floor(Math.random() * 255);
+      data[i] = gray;
+      data[i + 1] = gray;
+      data[i + 2] = gray;
+      data[i + 3] = opacityValue;
+    }
+
+    ctx.putImageData(imageData, 0, 0);
+  }, [width, height, opacity]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    canvas.width = width;
+    canvas.height = height;
+
+    const animate = () => {
+      generateNoise();
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    animate();
+    return () => animationRef.current && cancelAnimationFrame(animationRef.current);
+  }, [width, height, generateNoise]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className={className}
+      style={{
+        pointerEvents: 'none',
+        mixBlendMode: 'overlay',
+        width: '100%',
+        height: '100%',
+      }}
+    />
+  );
+};
+
+/* =======================
+   ScratchScreen Component
+======================= */
+const ScratchScreen = ({ width, height, onReveal }) => {
+  const canvasRef = useRef(null);
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [hasTriggeredReveal, setHasTriggeredReveal] = useState(false);
+  const [scratchPercentage, setScratchPercentage] = useState(0);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    canvas.width = width;
+    canvas.height = height;
+
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        const gray = Math.floor(Math.random() * 60) + 140;
+        ctx.fillStyle = `rgb(${gray}, ${gray}, ${gray})`;
+        ctx.fillRect(x, y, 1, 1);
+      }
+    }
+
+    ctx.globalCompositeOperation = 'destination-out';
+  }, [width, height]);
+
+  const calculateScratchPercentage = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return 0;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return 0;
+
+    const imageData = ctx.getImageData(0, 0, width, height);
+    let transparentPixels = 0;
+
+    for (let i = 3; i < imageData.data.length; i += 4) {
+      if (imageData.data[i] === 0) transparentPixels++;
+    }
+
+    return (transparentPixels / (width * height)) * 100;
+  };
+
+  const scratch = (x, y) => {
+    const ctx = canvasRef.current?.getContext('2d');
+    if (!ctx) return;
+
+    ctx.beginPath();
+    ctx.arc(x, y, 20, 0, Math.PI * 2);
+    ctx.fill();
+
+    const percentage = calculateScratchPercentage();
+    setScratchPercentage(percentage);
+
+    if (percentage > 30 && !hasTriggeredReveal) {
+      setHasTriggeredReveal(true);
+      onReveal?.();
+    }
+  };
+
+  const getPosition = e => {
+    const rect = canvasRef.current?.getBoundingClientRect();
+    if (!rect) return { x: 0, y: 0 };
+
+    if (e.touches) {
+      return {
+        x: e.touches[0].clientX - rect.left,
+        y: e.touches[0].clientY - rect.top,
+      };
+    }
+
+    return {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    };
+  };
+
+  const handleMove = e => {
+    if (!isDrawing) return;
+    const { x, y } = getPosition(e);
+    scratch(x, y);
+  };
+
+  return (
+    <div className="scratch-wrapper" style={{ width, height }}>
+      <img
+        src={comingSoonImage}
+        alt="Coming Soon"
+        className="scratch-image"
+        draggable={false}
+      />
+      <canvas
+        ref={canvasRef}
+        className="scratch-canvas"
+        onMouseDown={() => setIsDrawing(true)}
+        onMouseUp={() => setIsDrawing(false)}
+        onMouseLeave={() => setIsDrawing(false)}
+        onMouseMove={handleMove}
+        onTouchStart={() => setIsDrawing(true)}
+        onTouchEnd={() => setIsDrawing(false)}
+        onTouchMove={handleMove}
+      />
+      {scratchPercentage < 5 && (
+        <div className="scratch-hint">
+          <div className="scratch-hint-box">✨ Scratch to reveal</div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+/* =======================
+   StarReveal (Merged)
+======================= */
+const StarReveal = () => {
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [isRevealed, setIsRevealed] = useState(false);
+
+  const handleReveal = () => {
+    if (!isRevealed) {
+      setIsRevealed(true);
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 4000);
+    }
+  };
+
+  return (
+    <div className="tv-wrapper">
+      <div className="antenna-left">
+        <div className="antenna-left-rod" />
+        <div className="antenna-left-ball" />
+      </div>
+      <div className="antenna-right">
+        <div className="antenna-right-rod" />
+        <div className="antenna-right-ball" />
+      </div>
+
+      <div className="tv-body">
+        <div className="tv-ridge-1" />
+        <div className="tv-ridge-2" />
+
+        <div className="screen-bezel">
+          <div className="screen">
+            <div className="crt-curve" />
+            <div className="scanlines" />
+            <div className="noise-layer">
+              <NoiseCanvas width={212} height={188} opacity={0.4} />
+            </div>
+            <div className="scratch-container">
+              <ScratchScreen
+                width={186}
+                height={162}
+                onReveal={handleReveal}
+              />
+            </div>
+            {isRevealed && <div className="screen-glow" />}
+          </div>
+        </div>
+
+        <div className="control-panel">
+          <div className="tv-knob knob-1">
+            <div className="knob-indicator" />
+          </div>
+          <div className="tv-knob knob-2">
+            <div className="knob-indicator" />
+          </div>
+        </div>
+
+        <div className="speaker-panel">
+          <div className="speaker-grille" />
+        </div>
+
+        <div className="brand-label" />
+      </div>
+
+      <div className="tv-feet">
+        <div className="tv-foot" />
+        <div className="tv-foot" />
+      </div>
+
+      {showConfetti && <Confetti />}
+    </div>
+  );
+};
 
 export default StarReveal;

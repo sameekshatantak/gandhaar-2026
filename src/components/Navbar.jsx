@@ -104,28 +104,32 @@ export default function Navbar() {
 
         /* Positioning Logic */
         @media (min-width: 769px) {
-          .body-container {
-            top: 50%;
-            left: ${isOpen ? "100px" : "-300px"}; /* Slides from left */
-            transform: translateY(-50%);
-            opacity: ${isOpen ? "1" : "0"};
-          }
-          .mobile-power-toggle { 
-     display: none !important; 
+  .body-container {
+    top: 50%;
+    left: 24px;              /* Fixed visible position */
+    transform: translateY(-50%);
+    opacity: 1;              /* Always visible */
   }
-        }
+
+  .mobile-power-toggle {
+    display: none !important;
+  }
+}
+
 
         @media (max-width: 768px) {
-          .desktop-sidebar { display: none; }
-          .body-container {
-            left: 50%;
-            /* Responsive Scaling: Prevents remote from going off screen */
-            bottom: ${isOpen ? "20px" : "-100%"}; 
-            transform: translateX(-50%) scale(0.7); /* Scale down for mobile height */
-            transform-origin: bottom;
-            opacity: ${isOpen ? "1" : "0"};
-          }
-        }
+  .desktop-sidebar { display: none; }
+
+  .body-container {
+    left: 50%;
+    bottom: 0;                        /* 🔥 NO reserved space */
+    transform: translateX(-50%) scale(0.7);
+    transform-origin: bottom;
+    opacity: ${isOpen ? "1" : "0"};
+    pointer-events: ${isOpen ? "auto" : "none"};
+  }
+}
+
 
         /* ---------- YOUR EXACT REMOTE DESIGN ---------- */
         .body-main-border {
@@ -266,25 +270,25 @@ export default function Navbar() {
 
         /* ---------- MOBILE POWER TOGGLE ---------- */
         .mobile-power-toggle {
-          position: fixed;
-          bottom: 24px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 64px;
-          height: 64px;
-          border-radius: 50%;
-          background: #d32f2f;
-          color: #fff;
-          border: none;
-          font-size: 24px;
-          z-index: 1300;
-          cursor: pointer;
-          animation: bounce 1.6s infinite;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
+  position: fixed;
+  bottom: 20px;
+  right: 20px;              /* 👈 move to right */
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #d32f2f;
+  color: #fff;
+  border: none;
+  font-size: 22px;
+  z-index: 2000;            /* 👈 higher than footer */
+  cursor: pointer;
+  animation: bounce 1.6s infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+}
+
           /* 1. Add smooth transition to all button types */
 .desktop-shortcuts button,
 .btn-basic,
@@ -323,15 +327,6 @@ export default function Navbar() {
 }
       `}</style>
 
-      {/* DESKTOP SIDEBAR */}
-      <div className="desktop-sidebar">
-        <button className="desktop-power-btn" onClick={() => setIsOpen(!isOpen)}>⏻</button>
-        <div className="desktop-shortcuts">
-          <button onClick={() => scrollTo('home')}>Home</button>
-          <button onClick={() => scrollTo('themes')}>Themes</button>
-          <button onClick={() => scrollTo('schedule')}>Schedule</button>
-        </div>
-      </div>
 
       {/* MOBILE POWER TOGGLE */}
       {!isOpen && (
@@ -345,7 +340,7 @@ export default function Navbar() {
             <div className="container-btns-top">
               <div style={{width: '38px'}}></div> {/* Spacer */}
               <div className="mic-outer"><div className="mic-inner" /></div>
-              <button className="btn-power" onClick={() => setIsOpen(false)}>⏻</button>
+              <button className="btn-power" onClick={() => setIsOpen(false)}>x</button>
             </div>
 
             <div className="container-btns-main">

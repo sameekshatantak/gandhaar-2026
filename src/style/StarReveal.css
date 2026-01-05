@@ -1,0 +1,439 @@
+
+/* Main Page */
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: hidden;
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, hsl(30, 60%, 15%) 0%, hsl(25, 20%, 8%) 70%);
+  position: relative;
+}
+
+.ambient-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(ellipse 40% 30% at 20% 80%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 30% 40% at 80% 20%, rgba(180, 140, 40, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 50% at 50% 50%, rgba(30, 25, 15, 0.9) 0%, transparent 100%);
+}
+
+.floor-reflection {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8rem;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 100%);
+}
+
+.content-wrapper {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Teaser Text */
+.teaser-text {
+  text-align: center;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.teaser-title {
+  
+  font-size: 1.75rem;
+  color: hsl(38, 90%, 50%);
+  letter-spacing: 0.05em;
+  text-shadow: 
+    0 0 10px hsla(38, 90%, 50%, 0.5),
+    0 0 20px hsla(38, 90%, 50%, 0.3),
+    0 0 40px hsla(38, 90%, 50%, 0.2);
+}
+
+.teaser-subtitle {
+  font-size: 0.875rem;
+  color: hsl(40, 15%, 55%);
+  margin-top: 0.5rem;
+}
+
+.instruction-text {
+  font-size: 0.75rem;
+  color: hsl(40, 15%, 55%);
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  animation: fadeIn 0.5s ease-out 0.4s both;
+}
+
+/* Vintage TV */
+.tv-wrapper {
+  position: relative;
+  display: inline-block;
+  animation: float 3s ease-in-out infinite, scaleIn 0.3s ease-out 0.2s both;
+  filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.5));
+}
+
+/* Antennas */
+.antenna-left {
+  position: absolute;
+  top: -72px;
+  left: 37px;
+}
+
+.antenna-left-rod {
+  width: 3px;
+  height: 70px;
+  background: hsl(0, 0%, 28%);
+  transform: rotate(-15deg);
+  transform-origin: bottom;
+  border-radius: 2px;
+}
+
+.antenna-left-ball {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: hsla(40, 30%, 90%, 0.8);
+  border-radius: 50%;
+  top: -6px;
+  left: -2px;
+}
+
+.antenna-right {
+  position: absolute;
+  top: -52px;
+  left: 66px;
+}
+
+.antenna-right-rod {
+  width: 3px;
+  height: 50px;
+  background: hsl(0, 0%, 28%);
+  transform: rotate(35deg);
+  transform-origin: bottom;
+  border-radius: 2px;
+}
+
+.antenna-right-ball {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: hsla(40, 30%, 90%, 0.8);
+  border-radius: 50%;
+  top: -4px;
+  left: -1px;
+}
+
+/* TV Body */
+.tv-body {
+  position: relative;
+  width: 300px;
+  height: 220px;
+  background: linear-gradient(180deg, hsl(0, 0%, 32%) 0%, hsl(0, 0%, 26%) 50%, hsl(0, 0%, 22%) 100%);
+  border-radius: 6px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), inset 0 -2px 0 rgba(0,0,0,0.3);
+}
+
+.tv-ridge-1 {
+  position: absolute;
+  width: 70px;
+  height: 5px;
+  top: -5px;
+  left: 30px;
+  background: hsl(0, 0%, 28%);
+  border-radius: 4px 4px 0 0;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.tv-ridge-2 {
+  position: absolute;
+  width: 40px;
+  height: 6px;
+  top: -11px;
+  left: 45px;
+  background: hsl(0, 0%, 28%);
+  border-radius: 4px 4px 0 0;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+/* Screen Bezel */
+.screen-bezel {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 220px;
+  height: 196px;
+  background: hsl(0, 0%, 20%);
+  border-radius: 4px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Screen */
+.screen {
+  position: relative;
+  margin: 4px;
+  width: 212px;
+  height: 188px;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+  border-radius: 4px;
+  overflow: hidden;
+  animation: screenFlicker 4s linear infinite;
+}
+
+.screen::after {
+  content: '';
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  right: 40%;
+  bottom: 60%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.crt-curve {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  box-shadow: 
+    inset 0 0 60px rgba(0,0,0,0.8),
+    inset 0 0 100px rgba(0,0,0,0.5),
+    inset 0 -50px 80px rgba(0,0,0,0.3),
+    inset 0 50px 80px rgba(255,255,255,0.05);
+}
+
+.scanlines {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.scanlines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px);
+}
+
+.noise-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+}
+
+.scratch-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+
+.screen-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(212,175,55,0.15) 0%, transparent 70%);
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Control Panel */
+.control-panel {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 52px;
+  height: 110px;
+  background: linear-gradient(180deg, hsl(40, 30%, 55%) 0%, hsl(40, 25%, 48%) 100%);
+  border-radius: 4px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -1px 0 rgba(0,0,0,0.2);
+}
+
+.tv-knob {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  left: 10px;
+  background: linear-gradient(145deg, hsl(0, 0%, 92%) 0%, hsl(0, 0%, 78%) 100%);
+  border-radius: 50%;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.4), inset 1px 1px 2px rgba(255,255,255,0.5);
+}
+
+.knob-1 { top: 14px; }
+.knob-2 { top: 60px; }
+
+.knob-indicator {
+  position: absolute;
+  width: 3px;
+  height: 12px;
+  top: 4px;
+  left: 14px;
+  background: hsl(40, 15%, 55%);
+  border-radius: 2px;
+}
+
+.knob-1 .knob-indicator { transform: rotate(40deg); }
+.knob-2 .knob-indicator { transform: rotate(-20deg); }
+
+/* Speaker */
+.speaker-panel {
+  position: absolute;
+  top: 130px;
+  right: 12px;
+  width: 52px;
+  height: 78px;
+  background: linear-gradient(180deg, hsl(40, 30%, 55%) 0%, hsl(40, 25%, 48%) 100%);
+  border-radius: 4px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -1px 0 rgba(0,0,0,0.2);
+}
+
+.speaker-grille {
+  position: absolute;
+  width: 36px;
+  height: 50px;
+  top: 14px;
+  left: 8px;
+  background: repeating-linear-gradient(0deg, hsl(40, 25%, 52%) 0px, hsl(40, 25%, 52%) 2px, hsl(40, 20%, 42%) 2px, hsl(40, 20%, 42%) 4px);
+  border-radius: 4px;
+}
+
+/* Brand */
+.brand-label {
+  position: absolute;
+  bottom: 6px;
+  left: 12px;
+  width: 220px;
+  text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.3);
+}
+
+/* TV Feet */
+.tv-feet {
+  display: flex;
+  justify-content: center;
+  gap: 8rem;
+  margin-top: -4px;
+}
+
+.tv-foot {
+  width: 30px;
+  height: 8px;
+  background: hsl(0, 0%, 20%);
+  border-radius: 0 0 4px 4px;
+}
+
+/* Scratch Card */
+.scratch-wrapper {
+  position: relative;
+}
+
+.scratch-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.scratch-canvas {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.scratch-hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.scratch-hint-box {
+  background: hsla(25, 20%, 8%, 0.8);
+  backdrop-filter: blur(4px);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid hsla(38, 90%, 50%, 0.3);
+  font-size: 0.875rem;
+  color: hsl(38, 90%, 50%);
+  animation: scratchHint 2s ease-in-out infinite;
+}
+
+/* Confetti */
+.confetti-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  overflow: hidden;
+}
+
+.confetti {
+  position: absolute;
+  animation: confettiFall 3s ease-out forwards;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes screenFlicker {
+  0%, 100% { opacity: 1; }
+  93% { opacity: 0.8; }
+  94% { opacity: 1; }
+  96% { opacity: 0.9; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes scratchHint {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-3px, -3px) rotate(-2deg); }
+  75% { transform: translate(3px, 3px) rotate(2deg); }
+}
+
+@keyframes confettiFall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .teaser-title { font-size: 1.25rem; }
+  .tv-wrapper { transform: scale(0.85); }
+}

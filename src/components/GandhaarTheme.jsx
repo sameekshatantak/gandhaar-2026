@@ -1,188 +1,229 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import "../style/GandhaarTheme.css";
 
-const images = [
-  "/src/images/dance.jpeg",
-  "/src/images/sing.jpeg",
+
+const themes = [
+  { image: "../src/assets/images/GandhaarTheme/day1.jpg", audio: "../src/assets/audio/day1.mpeg" },
+  { image: "../src/assets/images/GandhaarTheme/day2.jpg", audio: "../src/assets/audio/day2.mp3" },
+  { image: "../src/assets/images/GandhaarTheme/day3.png", audio: "../src/assets/audio/day3.mpeg" },
+  { image: "../src/assets/images/GandhaarTheme/day4.png", audio: "../src/assets/audio/day4.mpeg" },
 ];
 
 const GandhaarTheme = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [powerOn, setPowerOn] = useState(false);
+  const [currentTheme, setCurrentTheme] = useState(0);
+  const [audioEnabled, setAudioEnabled] = useState(false);
+  const [overlayVisible, setOverlayVisible] = useState(true);
+  const slideshowRef = useRef(null);
+  const currentAudio = useRef(null);
 
+  const screenContentRef = useRef(null);
+  const tvScreenRef = useRef(null);
+
+  // ---------------- IMAGE CROSSFADE ----------------
+  const crossFadeImage = (newSrc) => {
+    const container = screenContentRef.current;
+    if (!container) return;
+
+    const currentImg = container.querySelector(".tv-image.active");
+    const nextImg = document.createElement("img");
+    nextImg.src = newSrc;
+    nextImg.className = "tv-image";
+    container.appendChild(nextImg);
+
+    void nextImg.offsetWidth; // trigger reflow
+    nextImg.classList.add("active");
+
+    if (currentImg) currentImg.classList.remove("active");
+
+    setTimeout(() => {
+      if (currentImg) currentImg.remove();
+    }, 1000);
+  };
+
+  // ---------------- AUDIO CONTROL ----------------
+  const fadeOutAudio = (audio, duration = 800) => {
+    if (!audio) return;
+    const step = audio.volume / (duration / 50);
+    const fade = setInterval(() => {
+      audio.volume = Math.max(0, audio.volume - step);
+      if (audio.volume <= 0) {
+        audio.pause();
+        clearInterval(fade);
+      }
+    }, 50);
+  };
+
+  const fadeInAudio = (audio, duration = 800) => {
+    audio.play();
+    const step = (0.8 - audio.volume) / (duration / 50);
+    const fade = setInterval(() => {
+      audio.volume = Math.min(0.8, audio.volume + step);
+      if (audio.volume >= 0.8) clearInterval(fade);
+    }, 50);
+  };
+
+  const playThemeAudio = (src) => {
+    if (!audioEnabled || !src) return;
+
+    if (currentAudio.current && currentAudio.current.src.includes(src)) {
+      fadeInAudio(currentAudio.current);
+      return;
+    }
+
+    if (currentAudio.current) fadeOutAudio(currentAudio.current);
+
+    currentAudio.current = new Audio(src);
+    currentAudio.current.loop = true;
+    currentAudio.current.volume = 0;
+
+    fadeInAudio(currentAudio.current);
+  };
+
+  // ---------------- LOAD THEME ----------------
+  const loadTheme = (index) => {
+    const theme = themes[index];
+    setOverlayVisible(false);
+
+    setTimeout(() => {
+      crossFadeImage(theme.image);
+      setOverlayVisible(true);
+
+      if (audioEnabled) playThemeAudio(theme.audio);
+    }, 300);
+  };
+
+  // ---------------- SLIDESHOW ----------------
+  const startSlideshow = () => {
+    slideshowRef.current = setInterval(() => {
+      setCurrentTheme((prev) => (prev + 1) % themes.length);
+    }, 10000);
+  };
+
+  const resetSlideshow = () => {
+    clearInterval(slideshowRef.current);
+    startSlideshow();
+  };
+
+  // ---------------- INIT ----------------
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((i) => (i + 1) % images.length);
-    }, 3000);
-    return () => clearInterval(interval);
+    const container = screenContentRef.current;
+    if (container) {
+      const img = document.createElement("img");
+      img.src = themes[0].image;
+      img.className = "tv-image active";
+      container.appendChild(img);
+    }
+
+    setTimeout(() => {
+      if (tvScreenRef.current) {
+        tvScreenRef.current.classList.remove("off");
+        tvScreenRef.current.classList.add("on");
+      }
+    }, 300);
+
+    startSlideshow();
+
+    return () => clearInterval(slideshowRef.current);
   }, []);
 
+  // Update theme when currentTheme changes
   useEffect(() => {
-    const t = setTimeout(() => setPowerOn(true), 300);
-    return () => clearTimeout(t);
-  }, []);
+    loadTheme(currentTheme);
+  }, [currentTheme]);
 
-  const TvKnob = ({ label }) => (
-    <svg className="knob" viewBox="0 0 50 50">
-      <title>{label}</title>
-      <circle cx="25" cy="25" r="23" fill="#aaa" stroke="#777" strokeWidth="2.5" />
-      <circle cx="35" cy="15" r="5" fill="#333" />
-    </svg>
-  );
+  // ---------------- HANDLERS ----------------
+  const handleChannelClick = () => {
+    setCurrentTheme((prev) => (prev + 1) % themes.length);
+    resetSlideshow();
+  };
 
-  const SpeakerGrill = () => (
-    <svg className="tv-speaker-grill" viewBox="0 0 500 50">
-      <rect width="500" height="50" rx="5" fill="#3e2723" />
-      {[...Array(30)].map((_, i) => (
-        <rect key={i} x={10 + i * 15} y="5" width="5" height="40" rx="1" fill="#5d4037" />
-      ))}
-    </svg>
-  );
+  const handleVolumeClick = () => {
+    setAudioEnabled((prev) => {
+      const newState = !prev;
+      if (newState) {
+        playThemeAudio(themes[currentTheme].audio);
+      } else if (currentAudio.current) {
+        fadeOutAudio(currentAudio.current);
+      }
+      return newState;
+    });
+  };
+
+  // ---------------- MOBILE SWIPE ----------------
+  let startX = 0;
+
+  const handleTouchStart = (e) => {
+    startX = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    const endX = e.changedTouches[0].clientX;
+    if (Math.abs(endX - startX) > 50) {
+      setCurrentTheme((prev) => (prev + 1) % themes.length);
+      resetSlideshow();
+    }
+  };
 
   return (
     <div className="homepage-container">
-      <style>{`
-        html, body {
-          margin: 0;
-          padding: 0;
-          overflow-x: hidden;
-        }
-
-        .homepage-container {
-          width: 100%;
-          height: 100vh;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          overflow: hidden;
-        }
-
-        .vintage-tv {
-          width: min(94vw, 1400px);
-          aspect-ratio: 16 / 9;
-          background: #6d4c41;
-          border: 14px solid #5d4037;
-          border-radius: 20px;
-          padding: 18px;
-          box-shadow: 0 15px 30px rgba(0,0,0,.5);
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-
-        /* SCREEN */
-        .tv-screen-frame {
-          width: 96%;
-          height: 78%;
-          background: #222;
-          border-radius: 10px;
-          overflow: hidden;
-          transform-origin: center;
-          transition: transform .7s ease, filter .4s;
-        }
-
-        .tv-screen-frame.on {
-          transform: scale(1);
-          filter: brightness(1);
-        }
-
-        .tv-screen-frame.off {
-          transform: scale(.2);
-          filter: brightness(0);
-        }
-
-        .tv-screen-content {
-          width: 100%;
-          height: 100%;
-          position: relative;
-        }
-
-        .tv-image {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          opacity: 0;
-          transition: opacity 1s;
-          filter: brightness(55%) contrast(110%);
-        }
-
-        .tv-image.active {
-          opacity: 1;
-        }
-
-        .tv-noise {
-          position: absolute;
-          inset: 0;
-          background: url("https://images.unsplash.com/photo-1580243117731-a108c2953e2c");
-          opacity: .12;
-          pointer-events: none;
-        }
-
-        .tv-ui {
-          width: 90%;
-          margin-top: 14px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .tv-knobs {
-          display: flex;
-          gap: 20px;
-        }
-
-        .knob {
-          width: 38px;
-          height: 38px;
-        }
-
-        .tv-speaker-grill {
-          width: 75%;
-          height: 45px;
-        }
-
-        /* 📱 MOBILE FIX */
-        @media (max-width: 768px) {
-          .vintage-tv {
-            height:50vh;
-            width: 96vw;
-          }
-
-          .tv-screen-frame {
-            width: 100%;
-            height: 100%;
-            filter: brightness(1);
-          }
-
-          .tv-ui {
-            margin-top: 8px;
-            margin-right: 2px;
-          }
-
-          .tv-speaker-grill {
-            width: 70%;
-          }
-        }
-      `}</style>
+      <h1 className="gandhaar-title">Gandhaar Themes</h1>
 
       <div className="vintage-tv">
-        <div className={`tv-screen-frame ${powerOn ? "on" : "off"}`}>
-          <div className="tv-screen-content">
-            {images.map((img, i) => (
-              <img key={i} src={img} className={`tv-image ${i === currentImageIndex ? "active" : ""}`} />
-            ))}
+        <div
+          className="tv-screen-frame off"
+          id="tvScreen"
+          ref={tvScreenRef}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div className="tv-screen-content" id="screenContent" ref={screenContentRef}></div>
+
+          <div className={`tv-overlay-text ${overlayVisible ? "show" : ""}`}>
+            <div className="fest-name" id="themeTitle"></div>
+            <div className="college-name" id="themeSubtitle"></div>
           </div>
-          <div className="tv-noise" />
+
+          <div className="tv-noise"></div>
         </div>
 
         <div className="tv-ui">
           <div className="tv-knobs">
-            <TvKnob label="CH" />
-            <TvKnob label="VOL" />
+            <div className="knob-wrapper">
+              <div className="knob-label">CH</div>
+              <svg className="knob" id="channelKnob" viewBox="0 0 50 50" onClick={handleChannelClick}>
+                <circle cx="25" cy="25" r="23" fill="#aaa" stroke="#777" strokeWidth="2.5" />
+                <circle cx="35" cy="15" r="5" fill="#333" />
+              </svg>
+            </div>
+
+            <div className="knob-wrapper">
+              <div className="knob-label">VOL</div>
+              <svg className="knob" id="volumeKnob" viewBox="0 0 50 50" onClick={handleVolumeClick}>
+                <circle cx="25" cy="25" r="23" fill="#aaa" stroke="#777" strokeWidth="2.5" />
+                <circle cx="35" cy="15" r="5" fill="#333" />
+              </svg>
+              
+            </div>
+       
           </div>
-          <SpeakerGrill />
+              
+          <div className="tv-speaker-grill"></div>
+          
         </div>
+       
+      </div>
+        <div className="click-hint">Hit VOL, hear the show!</div>
+
+      <div className="set-top-box">
+        <div className="stb-lights">
+          <span className="stb-light red"></span>
+          <span className="stb-light yellow"></span>
+        </div>
+        <Link to="/events" className="stb-cta">
+    CTV
+  </Link>
+
       </div>
     </div>
   );
