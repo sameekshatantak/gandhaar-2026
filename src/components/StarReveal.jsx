@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import comingSoonImage from '../assets/images/coming-soon.png';
 import "../style/StarReveal.css";
+
 /* =======================
    Confetti Component
 ======================= */
@@ -37,8 +38,7 @@ const Confetti = () => {
             backgroundColor: piece.color,
             animationDelay: `${piece.delay}s`,
             animationDuration: `${piece.duration}s`,
-            transform: `rotate(${piece.rotation}deg)`,
-            borderRadius: Math.random() > 0.5 ? '50%' : '2px',
+            transform: `rotate(${piece.rotation}deg)`
           }}
         />
       ))}
@@ -49,56 +49,65 @@ const Confetti = () => {
 /* =======================
    NoiseCanvas Component
 ======================= */
-const NoiseCanvas = ({ width, height, opacity = 0.15, className = '' }) => {
+const NoiseCanvas = ({ opacity = 0.15, hidden }) => {
   const canvasRef = useRef(null);
   const animationRef = useRef();
 
-  const generateNoise = useCallback(() => {
+  const generateNoise = useCallback((w, h) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    if (!ctx) return;
 
-    const imageData = ctx.createImageData(width, height);
+    const imageData = ctx.createImageData(w, h);
     const data = imageData.data;
-    const opacityValue = Math.floor(opacity * 255);
+    const alpha = Math.floor(opacity * 255);
 
     for (let i = 0; i < data.length; i += 4) {
-      const gray = Math.floor(Math.random() * 255);
-      data[i] = gray;
-      data[i + 1] = gray;
-      data[i + 2] = gray;
-      data[i + 3] = opacityValue;
+      const g = Math.random() * 255;
+      data[i] = data[i + 1] = data[i + 2] = g;
+      data[i + 3] = alpha;
     }
 
     ctx.putImageData(imageData, 0, 0);
-  }, [width, height, opacity]);
+  }, [opacity]);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (hidden) return;
 
-    canvas.width = width;
-    canvas.height = height;
+    const canvas = canvasRef.current;
+    const resize = () => {
+      canvas.width = canvas.parentElement.offsetWidth;
+      canvas.height = canvas.parentElement.offsetHeight;
+    };
+
+    resize();
 
     const animate = () => {
-      generateNoise();
+      generateNoise(canvas.width, canvas.height);
       animationRef.current = requestAnimationFrame(animate);
     };
 
     animate();
-    return () => animationRef.current && cancelAnimationFrame(animationRef.current);
-  }, [width, height, generateNoise]);
+    window.addEventListener('resize', resize);
+
+    return () => {
+      cancelAnimationFrame(animationRef.current);
+      window.removeEventListener('resize', resize);
+    };
+  }, [hidden, generateNoise]);
+
+  if (hidden) return null;
 
   return (
     <canvas
       ref={canvasRef}
-      className={className}
       style={{
-        pointerEvents: 'none',
-        mixBlendMode: 'overlay',
+        position: 'absolute',
+        inset: 0,
         width: '100%',
         height: '100%',
+        pointerEvents: 'none',
+        mixBlendMode: 'overlay',
       }}
     />
   );
@@ -107,107 +116,84 @@ const NoiseCanvas = ({ width, height, opacity = 0.15, className = '' }) => {
 /* =======================
    ScratchScreen Component
 ======================= */
-const ScratchScreen = ({ width, height, onReveal }) => {
+const ScratchScreen = ({ onReveal, hidden }) => {
   const canvasRef = useRef(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [hasTriggeredReveal, setHasTriggeredReveal] = useState(false);
   const [scratchPercentage, setScratchPercentage] = useState(0);
 
   useEffect(() => {
+    if (hidden) return;
+
     const canvas = canvasRef.current;
-    if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    if (!ctx) return;
 
-    canvas.width = width;
-    canvas.height = height;
+    canvas.width = canvas.parentElement.offsetWidth;
+    canvas.height = canvas.parentElement.offsetHeight;
 
-    for (let y = 0; y < height; y++) {
-      for (let x = 0; x < width; x++) {
-        const gray = Math.floor(Math.random() * 60) + 140;
-        ctx.fillStyle = `rgb(${gray}, ${gray}, ${gray})`;
+    for (let y = 0; y < canvas.height; y++) {
+      for (let x = 0; x < canvas.width; x++) {
+        const g = 140 + Math.random() * 60;
+        ctx.fillStyle = `rgb(${g},${g},${g})`;
         ctx.fillRect(x, y, 1, 1);
       }
     }
 
     ctx.globalCompositeOperation = 'destination-out';
-  }, [width, height]);
+  }, [hidden]);
 
   const calculateScratchPercentage = () => {
     const canvas = canvasRef.current;
-    if (!canvas) return 0;
     const ctx = canvas.getContext('2d');
-    if (!ctx) return 0;
-
-    const imageData = ctx.getImageData(0, 0, width, height);
-    let transparentPixels = 0;
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    let transparent = 0;
 
     for (let i = 3; i < imageData.data.length; i += 4) {
-      if (imageData.data[i] === 0) transparentPixels++;
+      if (imageData.data[i] === 0) transparent++;
     }
 
-    return (transparentPixels / (width * height)) * 100;
+    return (transparent / (canvas.width * canvas.height)) * 100;
   };
 
   const scratch = (x, y) => {
-    const ctx = canvasRef.current?.getContext('2d');
-    if (!ctx) return;
-
+    const ctx = canvasRef.current.getContext('2d');
     ctx.beginPath();
     ctx.arc(x, y, 20, 0, Math.PI * 2);
     ctx.fill();
 
-    const percentage = calculateScratchPercentage();
-    setScratchPercentage(percentage);
+    const percent = calculateScratchPercentage();
+    setScratchPercentage(percent);
 
-    if (percentage > 30 && !hasTriggeredReveal) {
+    if (percent > 30 && !hasTriggeredReveal) {
       setHasTriggeredReveal(true);
-      onReveal?.();
+      onReveal();
     }
   };
 
-  const getPosition = e => {
-    const rect = canvasRef.current?.getBoundingClientRect();
-    if (!rect) return { x: 0, y: 0 };
-
-    if (e.touches) {
-      return {
-        x: e.touches[0].clientX - rect.left,
-        y: e.touches[0].clientY - rect.top,
-      };
-    }
-
-    return {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    };
+  const getPos = e => {
+    const r = canvasRef.current.getBoundingClientRect();
+    const p = e.touches ? e.touches[0] : e;
+    return { x: p.clientX - r.left, y: p.clientY - r.top };
   };
 
-  const handleMove = e => {
-    if (!isDrawing) return;
-    const { x, y } = getPosition(e);
-    scratch(x, y);
-  };
+  if (hidden) {
+    return <img src={comingSoonImage} className="scratch-image" alt="Coming Soon" />;
+  }
 
   return (
-    <div className="scratch-wrapper" style={{ width, height }}>
-      <img
-        src={comingSoonImage}
-        alt="Coming Soon"
-        className="scratch-image"
-        draggable={false}
-      />
+    <div className="scratch-wrapper">
       <canvas
         ref={canvasRef}
         className="scratch-canvas"
         onMouseDown={() => setIsDrawing(true)}
         onMouseUp={() => setIsDrawing(false)}
         onMouseLeave={() => setIsDrawing(false)}
-        onMouseMove={handleMove}
+        onMouseMove={e => isDrawing && scratch(...Object.values(getPos(e)))}
         onTouchStart={() => setIsDrawing(true)}
         onTouchEnd={() => setIsDrawing(false)}
-        onTouchMove={handleMove}
+        onTouchMove={e => scratch(...Object.values(getPos(e)))}
       />
+
       {scratchPercentage < 5 && (
         <div className="scratch-hint">
           <div className="scratch-hint-box">✨ Scratch to reveal</div>
@@ -218,11 +204,11 @@ const ScratchScreen = ({ width, height, onReveal }) => {
 };
 
 /* =======================
-   StarReveal (Merged)
+   StarReveal Component
 ======================= */
 const StarReveal = () => {
-  const [showConfetti, setShowConfetti] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const handleReveal = () => {
     if (!isRevealed) {
@@ -233,60 +219,54 @@ const StarReveal = () => {
   };
 
   return (
-    <div className="tv-wrapper">
-      <div className="antenna-left">
-        <div className="antenna-left-rod" />
-        <div className="antenna-left-ball" />
-      </div>
-      <div className="antenna-right">
-        <div className="antenna-right-rod" />
-        <div className="antenna-right-ball" />
-      </div>
+    <div className="page-container">
+      <div className="tv-container">
+        <h1 className="gold-text">Star Night 1</h1>
+        <h2 className="gold-subtitle">Something Iconic is loading...</h2>
+        <h2 className="gold-subtitle">Can you guess what it is?</h2>
+        <br></br>
+        <br></br>
 
-      <div className="tv-body">
-        <div className="tv-ridge-1" />
-        <div className="tv-ridge-2" />
+        <div className="tv-body">
+          <div className="tv-ridge-1" />
+          <div className="tv-ridge-2" />
 
-        <div className="screen-bezel">
-          <div className="screen">
-            <div className="crt-curve" />
-            <div className="scanlines" />
-            <div className="noise-layer">
-              <NoiseCanvas width={212} height={188} opacity={0.4} />
+          <div className="screen-bezel">
+            <div className="screen">
+              <div className="crt-curve" />
+              <div className="scanlines" />
+
+              <div className="noise-layer">
+                <NoiseCanvas hidden={isRevealed} opacity={0.4} />
+              </div>
+
+              <div className="scratch-container">
+                <ScratchScreen hidden={isRevealed} onReveal={handleReveal} />
+              </div>
+
+              {isRevealed && <div className="screen-glow" />}
             </div>
-            <div className="scratch-container">
-              <ScratchScreen
-                width={186}
-                height={162}
-                onReveal={handleReveal}
-              />
-            </div>
-            {isRevealed && <div className="screen-glow" />}
           </div>
+
+          <div className="control-panel">
+            <div className="tv-knob knob-1"><div className="knob-indicator" /></div>
+            <div className="tv-knob knob-2"><div className="knob-indicator" /></div>
+          </div>
+
+          <div className="speaker-panel">
+            <div className="speaker-grille" />
+          </div>
+
+          <div className="brand-label" />
         </div>
 
-        <div className="control-panel">
-          <div className="tv-knob knob-1">
-            <div className="knob-indicator" />
-          </div>
-          <div className="tv-knob knob-2">
-            <div className="knob-indicator" />
-          </div>
+        <div className="tv-feet">
+          <div className="tv-foot" />
+          <div className="tv-foot" />
         </div>
 
-        <div className="speaker-panel">
-          <div className="speaker-grille" />
-        </div>
-
-        <div className="brand-label" />
+        {showConfetti && <Confetti />}
       </div>
-
-      <div className="tv-feet">
-        <div className="tv-foot" />
-        <div className="tv-foot" />
-      </div>
-
-      {showConfetti && <Confetti />}
     </div>
   );
 };

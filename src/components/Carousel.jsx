@@ -71,9 +71,9 @@ export default function Carousel() {
           Switch to {isMobileView ? "Website View" : "Mobile View"}
         </button>
       </div>
-      
+      <h1 className="carousel-title">IMAGE GALLERY</h1>
       <div className="carousel">
-         <h1 className="carousel-title">IMAGE GALLERY</h1>
+         
         <div className="carousel-rotation-direction">
           <ul
             className="carousel-item-wrapper"

@@ -4,6 +4,7 @@
     min-height: 100vh;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 @font-face {
     font-family: 'Quinlliyk';
     src: url('../assets/fonts/QuinlliykRegular-gx3ME.ttf') format('truetype');
@@ -182,5 +183,124 @@
 
     to {
         text-shadow: 0 0 30px #fff;
+    }
+}
+
+/* --- Custom Error Popup Styles --- */
+.error-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    /* Blurs the background content */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.error-popup {
+    background: #111;
+    border: 2px solid #d4af37;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 0 50px rgba(212, 175, 55, 0.3);
+    animation: popupFade 0.3s ease-out;
+}
+
+.error-icon {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.error-title {
+    color: #d4af37;
+    font-family: 'Quinlliyk', sans-serif;
+    font-size: 2.5rem;
+    margin: 0 0 10px 0;
+}
+
+.error-message {
+    color: #eee;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.retry-btn {
+    background: #d4af37;
+    color: black;
+    border: none;
+    padding: 12px 40px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.retry-btn:hover {
+    background: white;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #fff;
+}
+
+@keyframes popupFade {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Mobile Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .reveal-section {
+        height: auto;
+        min-height: 100vh;
+        padding: 20px 10px;
+        /* Force centering of all items in the section */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .theatre-stage {
+        /* You had 10vh here, which is very short. 
+           Changed to 60vh to actually increase the height. */
+        height: 50vh;
+        width: 78vw;
+        /* Using 90vw keeps it balanced on both sides */
+
+        /* Centering logic */
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        left: 0;
+        right: 0;
+    }
+
+    .gold-subtitle {
+        font-size: 2.5rem;
+        margin: 20px 0;
+    }
+
+    .stage-img {
+        height: 70%;
+        /* Adjusted height so it doesn't touch the borders */
+        width: auto;
+        bottom: 15%;
     }
 }

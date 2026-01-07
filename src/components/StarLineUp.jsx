@@ -41,8 +41,8 @@ const StarLineUp = () => {
     const [currentStep, setCurrentStep] = useState(0);
     const [targetImage, setTargetImage] = useState('');
     const [isFinished, setIsFinished] = useState(false);
+    const [showError, setShowError] = useState(false); // New state for popup
 
-    // Create a reference to the top of the reveal section
     const revealSectionRef = useRef(null);
 
     useEffect(() => {
@@ -65,18 +65,32 @@ const StarLineUp = () => {
 
             if (nextStep === 4) {
                 setIsFinished(true);
-                // Specifically scroll to the top of THIS component
                 revealSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         } else {
-            alert("Wrong! The curtains won't budge. Try again!");
+            // Trigger local frontend popup
+            setShowError(true);
         }
     };
 
     return (
         <div className="star-reveal-container" ref={revealSectionRef}>
+            {/* Custom Oops Popup */}
+            {showError && (
+                <div className="error-overlay">
+                    <div className="error-popup">
+                        <div className="error-icon">🎬</div>
+                        <h2 className="error-title">Oops!</h2>
+                        <p className="error-message">The curtains won't budge for that answer. Try again!</p>
+                        <button className="retry-btn" onClick={() => setShowError(false)}>
+                            Retry
+                        </button>
+                    </div>
+                </div>
+            )}
+
             <section className="reveal-section">
-                <h1 className="gold-subtitle">Star Night 2</h1>
+                <h1 className="gold-text">Star Night 2</h1>
 
                 <div className="theatre-stage">
                     {currentStep === 4 && (

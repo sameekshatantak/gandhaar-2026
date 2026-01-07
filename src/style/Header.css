@@ -1,7 +1,289 @@
-.header-image-only {
-  width: 100%;
-  background-size: contain;   /* 👈 key change */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: #805d4f;     /* fills empty space if aspect ratio differs */
+
+
+:root {
+  /* ===== SIZE CONTROLS ===== */
+  --disk-size: 610px;
+  --tv-width: 1610px;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #111;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 2000px; /* enables real depth perception */
+}
+
+.scene {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+}
+
+/* BACKGROUND */
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* =========================
+   DISK — STRONG 3D DEPTH
+========================= */
+.disk {
+  position: absolute;
+  width: var(--disk-size);
+  height: var(--disk-size);
+  left: 130px;
+  top: 350px;
+  z-index: 3;
+
+  animation: spin 14s linear infinite;
+  transform-origin: center center;
+  transform-style: preserve-3d;
+
+  /* MULTI-LAYER SHADOW (REALISTIC DEPTH) */
+  filter:
+    drop-shadow(0 18px 18px rgba(0,0,0,0.35))
+    drop-shadow(0 40px 50px rgba(0,0,0,0.45))
+    drop-shadow(0 80px 90px rgba(0,0,0,0.35));
+
+  transition: transform 0.4s ease;
+}
+
+/* GROUND SHADOW (CONTACT) */
+.disk::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0,0,0,0.55) 0%,
+    rgba(0,0,0,0.35) 35%,
+    transparent 70%
+  );
+  transform: translateZ(-80px) scale(1.15);
+  filter: blur(30px);
+  z-index: -1;
+}
+
+.disk:hover {
+  transform: translateZ(60px) scale(1.02);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* =========================
+   TV STACK — HEAVY 3D PRESENCE
+========================= */
+.tv {
+  position: absolute;
+  width: var(--tv-width);
+  height: auto;
+  left: 160px;
+  top: 186px;
+  z-index: 8;
+
+  transform-style: preserve-3d;
+
+  /* CINEMATIC DEPTH SHADOW */
+  filter:
+    drop-shadow(0 25px 30px rgba(0,0,0,0.45))
+    drop-shadow(0 60px 80px rgba(0,0,0,0.55))
+    drop-shadow(0 120px 140px rgba(0,0,0,0.45));
+
+  transition: transform 0.4s ease;
+}
+
+/* BASE CONTACT SHADOW */
+.tv::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.6),
+    transparent 70%
+  );
+  transform: translateZ(-120px) scale(1.1);
+  filter: blur(45px);
+  z-index: -1;
+}
+
+.tv:hover {
+  transform: translateZ(80px) translateY(-10px);
+}
+
+
+/* =========================
+   TV BOUNCE + FLOAT ON HOVER
+========================= 
+.tv:hover {
+  animation: tvBounce 1s ease-in-out infinite;
+  transform: translateZ(100px) translateY(-15px) rotateY(-15deg);
+}
+
+@keyframes tvBounce {
+  0%, 100% {
+    transform: translateZ(100px) translateY(-15px) rotateY(-15deg);
+  }
+  25% {
+    transform: translateZ(120px) translateY(-20px) rotateY(-18deg);
+  }
+  50% {
+    transform: translateZ(140px) translateY(-25px) rotateY(-12deg);
+  }
+  75% {
+    transform: translateZ(120px) translateY(-20px) rotateY(-18deg);
+  }
+}
+
+/* =========================
+   DISK HOVER POP + DEPTH
+========================= 
+.disk:hover {
+  transform: translateZ(80px) scale(1.05) rotateZ(0deg);
+  animation: diskBounce 1s ease-in-out infinite;
+}
+
+@keyframes diskBounce {
+  0%, 100% { transform: translateZ(80px) scale(1.05) rotateZ(0deg); }
+  25% { transform: translateZ(100px) scale(1.08) rotateZ(10deg); }
+  50% { transform: translateZ(120px) scale(1.1) rotateZ(20deg); }
+  75% { transform: translateZ(100px) scale(1.08) rotateZ(10deg); }
+}
+*/
+
+/* =========================
+   VISIBLE POP-UP ON HOVER
+========================= */
+
+/* TV STACK POP-UP */
+.tv:hover {
+  transform: translateZ(20px) scale(1.02); /* slightly bigger + lifted */
+  transition: transform 0.25s ease-out;
+}
+
+/* DISK POP-UP */
+.disk:hover {
+  transform: translateZ(20px) scale(1.04); /* slightly bigger + lifted */
+  transition: transform 0.25s ease-out;
+}
+
+/* =========================
+   WORD IMAGE ON TOP OF DISK
+========================= */
+.disk-word {
+  position: absolute;
+  left: 26%;           /* center horizontally over disk */
+  top: 60%;            /* center vertically over disk */
+  transform: translate(-50%, -50%);
+  width: 600px;        /* adjust based on your word image size */
+  z-index: 12;         /* make sure it’s above disk */
+  
+  filter: drop-shadow(0 0 15px #f4f3bb) brightness(1.2);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* POP-UP ON HOVER (optional) */
+.disk-word:hover {
+  transform: translate(-50%, -50%) translateZ(20px) scale(1.05);
+  filter: drop-shadow(0 0 25px #FFD700) brightness(1.4);
+}
+
+/* =========================
+   SECOND WORD IMAGE ON DISK
+========================= */
+.disk-word-2 {
+  position: absolute;
+  left: 26%;           /* center horizontally */
+  top: 68%;            /* adjust vertically below or above first word */
+  transform: translate(-50%, -50%);
+  width: 220px;        /* adjust size as needed */
+  z-index: 12;         /* above disk */
+
+  filter: drop-shadow(0 0 15px #00FFFF) brightness(1.2);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Optional small pop-up on hover */
+.disk-word-2:hover {
+  transform: translate(-50%, -50%) translateZ(20px) scale(1.05);
+  filter: drop-shadow(0 0 25px #00FFFF) brightness(1.4);
+}
+
+.tv-video {
+  position: absolute;
+  z-index: 15;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.5);
+  cursor: pointer; /* shows it’s clickable */
+}
+
+/* Example: video 1 positioning */
+.tv-video-1 {
+  width: 240px;
+  height: 290px;
+  left: 1210px;
+  top: 710px;
+}
+
+/* Example: video 2 positioning */
+.tv-video-2 {
+  width: 164px;
+  height: 90px;
+  left: 1183px;
+  top: 380px;
+}
+
+.tv-video-3 {
+  width: 120px;
+  height: 85px;
+  left: 1217px;
+  top: 575px;
+}
+
+/* Example: video 2 positioning tom n jerry*/
+.tv-video-4 {
+  width: 120px;
+  height: 80px;
+  left: 1060px;
+  top: 315px;
+}
+
+/* SHINY GLOW ON VIDEO ELEMENTS */
+.tv-video {
+  position: absolute;
+  z-index: 15;
+  object-fit: cover;
+  border-radius: 4px;
+
+  /* subtle glow */
+  box-shadow:
+    0 0 12px rgba(255, 255, 255, 0.4),  /* inner glow */
+    0 0 25px rgba(255, 255, 255, 0.2);  /* outer glow */
+
+  cursor: pointer; /* indicate clickable */
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Optional: hover effect to enhance glow */
+.tv-video:hover {
+  box-shadow:
+    0 0 18px rgba(255, 255, 255, 0.6),
+    0 0 35px rgba(255, 255, 255, 0.3);
+  transform: translateZ(10px); /* tiny pop for 3D effect */
+}
+
+

@@ -35,6 +35,7 @@
    TITLE
 ================================ */
 .gandhaar-title {
+  font-family: 'Quinlliyk';
   color: #ffffff;
   font-size: clamp(3rem, 7vw, 5.8rem);
   letter-spacing: 5px;
@@ -144,7 +145,7 @@
   z-index: 15;
   background-image: url("https://images.unsplash.com/photo-1580243117731-a108c2953e2c");
   background-size: 150%;
-  opacity: 0.08;
+  opacity: 0.05;
   animation: noise 0.25s steps(1) infinite;
 }
 

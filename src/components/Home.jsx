@@ -1,7 +1,9 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import "../style/Home.css";
 import "../style/Theme.css";
 
-import headerimage from "../assets/images/header_image.png";
+
 
 /* social icons */
 import instagramIcon from "../assets/images/instagram.png";
@@ -20,71 +22,107 @@ import StarLineUp from "./StarLineUp";
 import StarReveal from "./StarReveal";
 
 function Home() {
+  const location = useLocation();
+
+useEffect(() => {
+  if (location.state?.scrollTo) {
+    const el = document.getElementById(location.state.scrollTo);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+}, [location]);
+
   return (
     <div className="main-container">
-      {/* Remote / Navbar */}
+      
+      {/* REMOTE / NAVBAR */}
       <div className="remote-area">
         <Navbar />
       </div>
 
-      {/* 📺 TV BODY (UNCHANGED) */}
+      {/* 📺 TV BODY */}
       <div className="tv-wrapper">
+
         {/* SCREEN */}
         <div className="screen-container">
           <div className="crt-overlay"></div>
 
-          {/* 🔹 TOP CENTER BOX */}
+          {/* TOP CENTER BOX */}
           <div className="tv-center-box tv-top-box">
             <span className="tv-title">GANDHAAR 2026</span>
           </div>
 
           {/* 📡 BROADCAST CONTENT */}
           <div className="broadcast-content" id="home">
-            <Header bgImage={headerimage} />
 
+            {/* HOME */}
+            <Header/>
+
+            {/* THEMES */}
             <GrainWrapper bgColor="#f57f5b">
-              <GandhaarTheme />
+              <section id="themes">
+                <GandhaarTheme />
+              </section>
             </GrainWrapper>
 
+            {/* EVENTS */}
             <GrainWrapper bgColor="#dd5341">
-              <StarReveal />
+              <section id="events">
+  <StarReveal />
+
+              </section>
             </GrainWrapper>
 
+            {/* STAR LINEUP */}
             <GrainWrapper bgColor="#794a3a">
-              <StarLineUp />
+              <section id="lineup">
+                <StarLineUp />
+              </section>
             </GrainWrapper>
 
+            {/* ABOUT US */}
             <GrainWrapper bgColor="#1E1A16">
-              <AboutUs />
+              <section id="about">
+                <AboutUs />
+              </section>
             </GrainWrapper>
 
+            {/* SCHEDULE */}
             <GrainWrapper bgColor="#68c7c1">
-              <Carousel />
+              <section id="schedule">
+                <Carousel />
+              </section>
             </GrainWrapper>
 
+            {/* CULTURAL PANEL (optional section) */}
             <GrainWrapper bgColor="#3c6e6a">
-              <CulturalPanel />
+              <section id="panel">
+                <CulturalPanel />
+              </section>
             </GrainWrapper>
 
+            {/* TEAM */}
             <GrainWrapper bgColor="#6b7a3c">
-              <DevTeam />
+              <section id="team">
+                <DevTeam />
+              </section>
             </GrainWrapper>
 
           </div>
         </div>
 
-        {/* 🔘 CONTROLS + FOOTER STRIP */}
+        {/* CONTROLS + FOOTER */}
         <div className="controls-container">
-
-          {/* FOOTER BOX */}
           <div className="tv-footer-box">
+
             <span className="footer-text">
-             <span className="footer-line-1">
-      MKSSS Cummins College of Engineering for Women
-    </span>
-    <span className="footer-line-2">
-      Karve Nagar, Pune – 411-052
-    </span>
+              <span className="footer-line-1">
+                MKSSS Cummins College of Engineering for Women
+              </span>
+              <span className="footer-line-2">
+                Karve Nagar, Pune – 411-052
+              </span>
             </span>
 
             <div className="footer-icons">
@@ -96,18 +134,14 @@ function Home() {
                 <img src={instagramIcon} alt="Instagram" />
               </a>
 
-
               <a href="mailto:gandhaar@cumminscollege.in">
                 <img src={mailIcon} alt="Email" />
               </a>
-             
-
             </div>
-          
-          </div>
-            
 
+          </div>
         </div>
+
       </div>
     </div>
   );

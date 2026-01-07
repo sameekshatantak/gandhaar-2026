@@ -1,17 +1,27 @@
 import { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const bodyMainRef = useRef(null);
 
   // Helper to handle smooth scrolling to sections
-  const scrollTo = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      if (window.innerWidth <= 768) setIsOpen(false); // Close on mobile after click
-    }
-  };
+  const navigate = useNavigate();
+const location = useLocation();
+
+const scrollTo = (id) => {
+  // If not on home page, go there first
+  if (location.pathname !== "/") {
+    navigate("/", { state: { scrollTo: id } });
+  } else {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  }
+
+  if (window.innerWidth <= 768) setIsOpen(false);
+};
+
 
   // 3D Tilt Logic from your code
   useEffect(() => {

@@ -2,71 +2,90 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gandhaar 2026</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div class="homepage-container">
-  <!-- TITLE ABOVE TV -->
-  <h1 class="gandhaar-title">Gandhaar Themes</h1>
+<div class="scene">
 
-  <!-- TV -->
-  <div class="vintage-tv">
+  <img src="images/bgg.jpg" class="bg" />
 
-    <div class="tv-screen-frame off" id="tvScreen">
-      <div class="tv-screen-content" id="screenContent"></div>
+  <!-- WORD IMAGE ON TOP OF DISK -->
+<img src="images/word.png" class="disk-word" />
 
-      <!-- TEXT ON TV SCREEN -->
-      <div class="tv-overlay-text show">
-        <div class="fest-name" id="themeTitle"></div>
-        <div class="college-name" id="themeSubtitle"></div>
-      </div>
+<!-- SECOND WORD IMAGE ON TOP OF DISK -->
+<img src="images/word2.png" class="disk-word-2" />
 
-      <div class="tv-noise"></div>
-    </div>
+  <img src="images/disk.png" class="disk" />
 
-    <!-- TV UI -->
-    <div class="tv-ui">
-      <div class="tv-knobs">
+  <img src="images/tv.png" class="tv" />
 
-        <!-- CHANNEL -->
-        <div class="knob-wrapper">
-          <div class="knob-label">CH</div>
-          <svg class="knob" id="channelKnob" viewBox="0 0 50 50">
-            <circle cx="25" cy="25" r="23" fill="#aaa" stroke="#777" stroke-width="2.5"/>
-            <circle cx="35" cy="15" r="5" fill="#333"/>
-          </svg>
-        </div>
+  <!-- VIDEO OVER TV 
+<video src="videos/video1.mp4" class="tv-video tv-video-1" loop></video>
+<video src="videos/video2.mp4" class="tv-video tv-video-2" loop></video>
+ VIDEO OVER TV 
+<video src="videos/video3.mp4" class="tv-video tv-video-3" loop></video>
+<video src="videos/video4.mp4" class="tv-video tv-video-4" loop></video> -->
 
-        <!-- VOLUME -->
-        <div class="knob-wrapper">
-          <div class="knob-label">VOL</div>
-          <svg class="knob" id="volumeKnob" viewBox="0 0 50 50">
-            <circle cx="25" cy="25" r="23" fill="#aaa" stroke="#777" stroke-width="2.5"/>
-            <circle cx="35" cy="15" r="5" fill="#333"/>
-          </svg>
-          <div class="click-hint">CLICK HERE</div>
-        </div>
+<!-- VIDEO OVER TV -->
+<video class="tv-video tv-video-1" src="videos/video1.mp4" autoplay muted loop playsinline></video>
+<video class="tv-video tv-video-2" src="videos/video2.mp4" autoplay muted loop playsinline></video>
+<!-- VIDEO OVER TV -->
+<video class="tv-video tv-video-3" src="videos/video3.mp4" autoplay muted loop playsinline></video>
+<video class="tv-video tv-video-4" src="videos/video4.mp4" autoplay muted loop playsinline></video>
 
-      </div>
 
-      <div class="tv-speaker-grill"></div>
-    </div>
 
-  </div>
-  <!-- SET TOP BOX -->
-<div class="set-top-box">
-  <div class="stb-lights">
-    <span class="stb-light red"></span>
-    <span class="stb-light yellow"></span>
-  </div>
-
-  <a href="/events" class="stb-cta">CTV</a>
-</div>
 </div>
 
-<script src="script.js"></script>
 </body>
 </html>
+
+<!-- <script>
+  // Select all videos
+  const videos = document.querySelectorAll('.tv-video');
+
+  videos.forEach(video => {
+    video.addEventListener('click', () => {
+      if (video.paused) {
+        video.play();    // play the video
+      } else {
+        video.pause();   // optional: pause on second click
+      }
+    });
+  });
+</script> -->
+
+<!--<script>
+  const tvVideos = document.querySelectorAll('.tv-video');
+
+  tvVideos.forEach(video => {
+    video.addEventListener('click', () => {
+      video.muted = false;   // enable audio
+      video.volume = 1.0;   // full volume
+      video.play();         // ensure playback
+    });
+  });
+</script> -->
+
+<script>
+  const tvVideos = document.querySelectorAll('.tv-video');
+
+  tvVideos.forEach(video => {
+
+    // AUDIO ON HOVER
+    video.addEventListener('mouseenter', () => {
+      video.muted = false;
+      video.volume = 1.0;
+      video.play();
+    });
+
+    // AUDIO OFF WHEN MOUSE LEAVES
+    video.addEventListener('mouseleave', () => {
+      video.muted = true;
+    });
+
+  });
+</script>
+
