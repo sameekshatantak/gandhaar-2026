@@ -1,14 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import day1 from "../assets/images/GandhaarTheme/day1.jpg";
+import day2 from "../assets/images/GandhaarTheme/day2.jpg";
+import day3 from "../assets/images/GandhaarTheme/day3.png";
+import day4 from "../assets/images/GandhaarTheme/day4.png";
 import "../style/GandhaarTheme.css";
 
 
+
 const themes = [
-  { image: "../src/assets/images/GandhaarTheme/day1.jpg", audio: "../src/assets/audio/day1.mpeg" },
-  { image: "../src/assets/images/GandhaarTheme/day2.jpg", audio: "../src/assets/audio/day2.mp3" },
-  { image: "../src/assets/images/GandhaarTheme/day3.png", audio: "../src/assets/audio/day3.mpeg" },
-  { image: "../src/assets/images/GandhaarTheme/day4.png", audio: "../src/assets/audio/day4.mpeg" },
+  { image: day1, audio: "/audio/day1.mpeg" },
+  { image: day2, audio: "/audio/day2.mp3" },
+  { image: day3, audio: "/audio/day3.mpeg" },
+  { image: day4, audio: "/audio/day4.mpeg" },
 ];
+
+
 
 const GandhaarTheme = () => {
   const [currentTheme, setCurrentTheme] = useState(0);
