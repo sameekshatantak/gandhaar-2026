@@ -1,0 +1,398 @@
+/* ================================
+   RESPONSIVE TV SCALE (FIXED)
+================================ */
+
+:root {
+  --tv-scale: 1.65;
+}
+
+/* Large desktops */
+@media (min-width: 1440px) {
+  :root {
+    --tv-scale: 2;
+  }
+}
+
+/* Laptops */
+@media (max-width: 1280px) {
+  :root {
+    --tv-scale: 1.8;
+  }
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+  :root {
+    --tv-scale: 1.4;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  :root {
+    --tv-scale: 1.05;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  :root {
+    --tv-scale: 0.85;
+  }
+}
+
+
+@font-face {
+    font-family: 'Quinlliyk';
+    src: url('../assets/fonts/QuinlliykRegular-gx3ME.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Typography */
+.gold-text {
+    color: #d4af37;
+    font-family: 'Quinlliyk', sans-serif;
+    font-size: clamp(4rem, 8vw, 6rem);
+    margin: 0;
+}
+
+.gold-subtitle {
+    font-family: 'Quinlliyk', sans-serif;
+    color: #f0f0f0;
+    font-size: 1.5rem;
+    opacity: 0.8;
+}
+.hidden-layer {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  pointer-events: none;
+}
+
+/* ================================
+   PAGE / CONTAINER
+================================ */
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.tv-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.6));
+}
+
+/* ================================
+   BACKGROUND EFFECTS
+================================ */
+.ambient-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 40% 30% at 20% 80%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 30% 40% at 80% 20%, rgba(180, 140, 40, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 50% at 50% 50%, rgba(30, 25, 15, 0.9) 0%, transparent 100%);
+}
+
+.floor-reflection {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 8rem;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 100%);
+}
+
+/* ================================
+   TV BODY
+================================ */
+.tv-body {
+  position: relative;
+  width: calc(300px * var(--tv-scale));
+  height: calc(220px * var(--tv-scale));
+  background: linear-gradient(180deg, hsl(0, 0%, 32%) 0%, hsl(0, 0%, 26%) 50%, hsl(0, 0%, 22%) 100%);
+  border-radius: 6px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), inset 0 -2px 0 rgba(0,0,0,0.3);
+}
+
+/* Ridges */
+.tv-ridge-1 {
+  position: absolute;
+  width: calc(70px * var(--tv-scale));
+  height: calc(5px * var(--tv-scale));
+  top: calc(-5px * var(--tv-scale));
+  left: calc(30px * var(--tv-scale));
+  background: hsl(0, 0%, 28%);
+}
+
+.tv-ridge-2 {
+  position: absolute;
+  width: calc(40px * var(--tv-scale));
+  height: calc(6px * var(--tv-scale));
+  top: calc(-11px * var(--tv-scale));
+  left: calc(45px * var(--tv-scale));
+  background: hsl(0, 0%, 28%);
+}
+
+/* ================================
+   SCREEN
+================================ */
+.screen-bezel {
+  position: absolute;
+  top: calc(12px * var(--tv-scale));
+  left: calc(12px * var(--tv-scale));
+  width: calc(220px * var(--tv-scale));
+  height: calc(196px * var(--tv-scale));
+  background: hsl(0, 0%, 20%);
+}
+
+.screen {
+  position: relative;
+  margin: calc(3px * var(--tv-scale));
+  width: calc(214px * var(--tv-scale));
+  height: calc(190px * var(--tv-scale));
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+  overflow: hidden;
+  animation: screenFlicker 4s linear infinite;
+}
+
+.screen::after {
+  content: '';
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  right: 40%;
+  bottom: 60%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.crt-curve {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  box-shadow:
+    inset 0 0 60px rgba(0,0,0,0.8),
+    inset 0 0 100px rgba(0,0,0,0.5),
+    inset 0 -50px 80px rgba(0,0,0,0.3),
+    inset 0 50px 80px rgba(255,255,255,0.05);
+}
+
+.scanlines {
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.scanlines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.15) 2px,
+    rgba(0,0,0,0.15) 4px
+  );
+}
+
+.noise-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+}
+
+/* ================================
+   SCRATCH CARD
+================================ */
+.scratch-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;           /* ✅ REMOVE padding */
+}
+
+.scratch-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+
+.scratch-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;    /* ✅ fills screen */
+}
+
+
+.scratch-canvas {
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.scratch-hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.scratch-hint-box {
+  background: hsla(25, 20%, 8%, 0.8);
+  backdrop-filter: blur(4px);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid hsla(38, 90%, 50%, 0.3);
+  font-size: 2.5rem;
+  color: hsl(38, 90%, 50%);
+  animation: scratchHint 2s ease-in-out infinite;
+}
+
+/* ================================
+   CONTROL PANEL
+================================ */
+.control-panel {
+  position: absolute;
+  top: calc(12px * var(--tv-scale));
+  right: calc(12px * var(--tv-scale));
+  width: calc(52px * var(--tv-scale));
+  height: calc(110px * var(--tv-scale));
+  background: linear-gradient(180deg, hsl(40, 30%, 55%) 0%, hsl(40, 25%, 48%) 100%);
+  border-radius: 4px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -1px 0 rgba(0,0,0,0.2);
+}
+
+.tv-knob {
+  position: absolute;
+  width: calc(32px * var(--tv-scale));
+  height: calc(32px * var(--tv-scale));
+  left: calc(10px * var(--tv-scale));
+  background: linear-gradient(145deg, hsl(0, 0%, 92%) 0%, hsl(0, 0%, 78%) 100%);
+  border-radius: 50%;
+}
+
+.knob-1 { top: calc(14px * var(--tv-scale)); }
+.knob-2 { top: calc(60px * var(--tv-scale)); }
+
+.knob-indicator {
+  position: absolute;
+  width: 3px;
+  height: 12px;
+  top: 4px;
+  left: 14px;
+  background: hsl(40, 15%, 55%);
+  border-radius: 2px;
+}
+
+/* ================================
+   SPEAKER
+================================ */
+.speaker-panel {
+  position: absolute;
+  top: calc(130px * var(--tv-scale));
+  right: calc(12px * var(--tv-scale));
+  width: calc(52px * var(--tv-scale));
+  height: calc(78px * var(--tv-scale));
+  background: linear-gradient(180deg, hsl(40, 30%, 55%) 0%, hsl(40, 25%, 48%) 100%);
+  border-radius: 4px;
+}
+
+.speaker-grille {
+  position: absolute;
+  width: calc(36px * var(--tv-scale));
+  height: calc(50px * var(--tv-scale));
+  top: calc(14px * var(--tv-scale));
+  left: calc(8px * var(--tv-scale));
+  background: repeating-linear-gradient(
+    0deg,
+    hsl(40, 25%, 52%) 0px,
+    hsl(40, 25%, 52%) 2px,
+    hsl(40, 20%, 42%) 2px,
+    hsl(40, 20%, 42%) 4px
+  );
+  border-radius: 4px;
+}
+
+/* ================================
+   TV FEET
+================================ */
+.tv-feet {
+  display: flex;
+  justify-content: center;
+  gap: calc(8rem * var(--tv-scale));
+  margin-top: calc(-4px * var(--tv-scale));
+}
+
+.tv-foot {
+  width: calc(30px * var(--tv-scale));
+  height: calc(8px * var(--tv-scale));
+  background: hsl(0, 0%, 20%);
+  border-radius: 0 0 4px 4px;
+}
+
+/* ================================
+   CONFETTI
+================================ */
+.confetti-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  overflow: hidden;
+}
+
+.confetti {
+  position: absolute;
+  animation: confettiFall 3s ease-out forwards;
+}
+
+/* ================================
+   ANIMATIONS
+================================ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes screenFlicker {
+  0%, 100% { opacity: 1; }
+  93% { opacity: 0.8; }
+  94% { opacity: 1; }
+  96% { opacity: 0.9; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes scratchHint {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-3px, -3px) rotate(-2deg); }
+  75% { transform: translate(3px, 3px) rotate(2deg); }
+}
+
+@keyframes confettiFall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gandhaar 2026</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="scene">
+
+  <img src="images/bgg.jpg" class="bg" />
+
+  <!-- WORD IMAGE ON TOP OF DISK -->
+<img src="images/word.png" class="disk-word" />
+
+<!-- SECOND WORD IMAGE ON TOP OF DISK -->
+<img src="images/word2.png" class="disk-word-2" />
+
+  <img src="images/disk.png" class="disk" />
+
+  <img src="images/tv.png" class="tv" />
+
+  <!-- VIDEO OVER TV 
+<video src="videos/video1.mp4" class="tv-video tv-video-1" loop></video>
+<video src="videos/video2.mp4" class="tv-video tv-video-2" loop></video>
+ VIDEO OVER TV 
+<video src="videos/video3.mp4" class="tv-video tv-video-3" loop></video>
+<video src="videos/video4.mp4" class="tv-video tv-video-4" loop></video> -->
+
+<!-- VIDEO OVER TV -->
+<video class="tv-video tv-video-1" src="videos/video1.mp4" autoplay muted loop playsinline></video>
+<video class="tv-video tv-video-2" src="videos/video2.mp4" autoplay muted loop playsinline></video>
+<!-- VIDEO OVER TV -->
+<video class="tv-video tv-video-3" src="videos/video3.mp4" autoplay muted loop playsinline></video>
+<video class="tv-video tv-video-4" src="videos/video4.mp4" autoplay muted loop playsinline></video>
+
+
+
+</div>
+
+</body>
+</html>
+
+<!-- <script>
+  // Select all videos
+  const videos = document.querySelectorAll('.tv-video');
+
+  videos.forEach(video => {
+    video.addEventListener('click', () => {
+      if (video.paused) {
+        video.play();    // play the video
+      } else {
+        video.pause();   // optional: pause on second click
+      }
+    });
+  });
+</script> -->
+
+<!--<script>
+  const tvVideos = document.querySelectorAll('.tv-video');
+
+  tvVideos.forEach(video => {
+    video.addEventListener('click', () => {
+      video.muted = false;   // enable audio
+      video.volume = 1.0;   // full volume
+      video.play();         // ensure playback
+    });
+  });
+</script> -->
+
+<script>
+  const tvVideos = document.querySelectorAll('.tv-video');
+
+  tvVideos.forEach(video => {
+
+    // AUDIO ON HOVER
+    video.addEventListener('mouseenter', () => {
+      video.muted = false;
+      video.volume = 1.0;
+      video.play();
+    });
+
+    // AUDIO OFF WHEN MOUSE LEAVES
+    video.addEventListener('mouseleave', () => {
+      video.muted = true;
+    });
+
+  });
+</script>
+

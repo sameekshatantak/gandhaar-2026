@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:5173/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="module">import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;</script>
+
+    <script type="module" src="./eventsgridpg_files/client"></script>
+
+    
+    <link rel="icon" type="image/svg+xml" href="http://localhost:5173/vite.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>events-ui</title>
+  <style type="text/css" data-vite-dev-id="C:/Users/Mrunmayi/Documents/events-ui/src/index.css">:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+</style><style type="text/css" data-vite-dev-id="C:/Users/Mrunmayi/Documents/events-ui/src/styles/Events.css">:root {
+  --card-w: 380px;
+  --card-h: 420px;
+}
+
+body {
+  background: #000;
+  font-family: "Roboto", sans-serif;
+}
+
+/* GRID */
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  justify-items: centre;
+  padding: 40px;
+}
+
+/* CARD */
+.card {
+  width: var(--card-w);
+  height: var(--card-h);
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+
+  background: linear-gradient(#000, #000) padding-box,
+    linear-gradient(135deg, #ff0055, #ffcc00, #00ffd5) border-box;
+  border: 2px solid transparent;
+
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+
+  box-shadow:
+    inset 0 0 40px rgba(0,0,0,0.6),
+    0 0 30px rgba(0,0,0,0.5);
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 40px 90px rgba(255, 0, 85, 0.45);
+}
+
+/* BG */
+.bg {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  height: 60%;
+  width: 100%;
+  background-size: cover;
+}
+
+/* OVERLAY */
+.card::before {
+  background: linear-gradient(
+    180deg,
+    rgba(10, 15, 40, 0.35),
+    rgba(0, 0, 0, 0.65) 70%
+  );
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.15) 15%,
+    rgba(0, 0, 0, 0.15) 85%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+/* LOGO */
+.logo {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 255, 255, 0.45),
+    rgba(0, 0, 0, 0.6)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.logo img {
+  width: 42px;
+}
+
+/* INFO PANEL */
+.info-panel {
+  position: absolute;
+  left: 11px;
+  right: 14px;
+  bottom: 14px;
+  height: 155px;
+  background: rgba(20, 20, 20, 0.45);
+  backdrop-filter: blur(14px);
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  gap: 20px;
+  color: #fff;
+  z-index: 2;
+}
+
+.left {
+  flex: 1;
+}
+
+.event-code {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.event-title {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+/* TAGS */
+.legend {
+  margin-left:-8px;
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.red { background: #e53935; }
+.green { background: #2ecc71; }
+.blue { background: #2196f3; }
+.yellow { background: #fdd835; }
+
+/* RIGHT */
+
+.right {
+  padding-right: -4px;
+  margin-top:11px;
+  width: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 11px;   /* 🔥 YAHI se sab spacing control hogi */
+}
+
+
+.live-pill {
+  background: #ff2c3d;
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-size: 10px;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* ✅ DATE – smaller + premium */
+.date {
+   background: rgba(255, 255, 255, 0.12);
+  font-size: 10.8px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color:#ffffff;
+}
+
+/* TIME */
+.time {
+  background: rgba(255, 255, 255, 0.12);
+  padding: 4px 9px;
+  width:130px;
+  height:10px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+/* PROGRESS */
+.progress-wrap {
+  
+  width: 110px;
+  height: 9px;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 2px;
+  border-radius: 20px;
+}
+
+.progress {
+  height: 100%;
+  background: linear-gradient(90deg, #00ff7f, #00cc44);
+  border-radius: 20px;
+}
+
+/* === GET DETAILS BUTTON === */
+
+.details-box {
+ 
+  width: 110px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  font-size: 13px;
+  font-weight: 600;
+  color: #111;
+
+  background: linear-gradient(135deg, #ffffff, #f2f2f2);
+  border-radius: 8px;
+  border: none;
+
+  cursor: pointer;
+  user-select: none;
+
+  box-shadow:
+    0 4px 14px rgba(255, 214, 0, 0.45),
+    inset 0 -1px 0 rgba(0,0,0,0.25);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+
+  /* ✅ CONTINUOUS BREATHING */
+  animation: breathe 1s ease-in-out infinite;
+}
+
+.details-box:hover {
+  filter: brightness(1.08);
+}
+
+.details-box:active {
+  transform: scale(0.94);
+}
+
+/* ✅ BREATHING ANIMATION (OPTION 1) */
+@keyframes breathe {
+  0% {
+    box-shadow: 0 0 0 rgba(255, 200, 0, 0.35);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 14px rgba(255, 200, 0, 0.75);
+    transform: scale(1.03);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(255, 200, 0, 0.35);
+    transform: scale(1);
+  }
+}
+
+/* modal css same as pehle */
+</style></head>
+  <body>
+    <div id="root"><div class="events-grid"><div class="card"><div class="bg" style="background-image: url(&quot;/images/antakshari.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">001 Antakshari Premiere League</div><div class="event-title">Department Antakshari </div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Main Building Quadrangle</div><div class="item"><span class="dot green"></span>Team size:6 members</div><div class="item"><span class="dot blue"></span>Participation:Dept Wise</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️28 January 2026</div><div class="time">⏰12:30 PM -2:30 PM</div><div class="progress-wrap"><div class="progress" style="width: 25%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/sketching.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">002 Mastersketch </div><div class="event-title">
+Sketching</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Between Main &amp; IT Building </div><div class="item"><span class="dot green"></span>Team size:1 member</div><div class="item"><span class="dot blue"></span>Participation:1 student per class</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️28 January 2026</div><div class="time">⏰12:30 PM -2:00 PM</div><div class="progress-wrap"><div class="progress" style="width: 25%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/tshirtsneaker.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">003  CTV Style Lab</div><div class="event-title">T Shirt/Sneaker Designing</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Instru Quadrangle</div><div class="item"><span class="dot green"></span>Team-size:1 or 2 members</div><div class="item"><span class="dot blue"></span>Participation:1 team per class</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️28 January 2026</div><div class="time">⏰12:30 PM -2:30 PM</div><div class="progress-wrap"><div class="progress" style="width: 25%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/spellbee.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">004 CTV's Next Spell Star</div><div class="event-title">Spelling Bee</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:KB Joshi Audi</div><div class="item"><span class="dot green"></span>Team size:2-3 members</div><div class="item"><span class="dot blue"></span>Participation: 1 team per class</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️28 January 2026</div><div class="time">⏰12:30 PM -2:30 PM</div><div class="progress-wrap"><div class="progress" style="width: 25%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/kkk.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">005 Khatro Ke Khiladi </div><div class="event-title">Khatro Ke Khiladi</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Mech Circle</div><div class="item"><span class="dot green"></span>Team size:2 members</div><div class="item"><span class="dot blue"></span>Participation:</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️28 January 2026</div><div class="time">⏰12:00 PM - 2:00 PM</div><div class="progress-wrap"><div class="progress" style="width: 25%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/debate.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">006 Aap ki Adalat</div><div class="event-title">
+Debate</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Stage 2</div><div class="item"><span class="dot green"></span>Team size:1-3 members</div><div class="item"><span class="dot blue"></span>Participation:1 team from each class</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️28 January 2026</div><div class="time">⏰2.30 PM - 4:30 PM</div><div class="progress-wrap"><div class="progress" style="width: 25%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/painting.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">007 Game of strokes</div><div class="event-title">
+Painting competition</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Between Main &amp; IT Building </div><div class="item"><span class="dot green"></span>Team size:1 member </div><div class="item"><span class="dot blue"></span> Participation:1 student per class</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️28 January 2026</div><div class="time">⏰2.30 PM - 4:30 PM</div><div class="progress-wrap"><div class="progress" style="width: 25%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/mehendi.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">008 QALA</div><div class="event-title">Mehendi
+</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Mech Circle</div><div class="item"><span class="dot green"></span>Team size:1-2 members</div><div class="item"><span class="dot blue"></span>Participation:1 team per class</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️28 January 2026</div><div class="time">⏰2:30 PM - 4:30 PM</div><div class="progress-wrap"><div class="progress" style="width: 25%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/interclass.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">009  Nach Baliye: Class Wars</div><div class="event-title">Interclass Dance </div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Samstha Ground</div><div class="item"><span class="dot green"></span>Team size:12-19 </div><div class="item"><span class="dot blue"></span>Participation:1 team per class</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️28 January 2026</div><div class="time">⏰5:00 PM -10:00 PM</div><div class="progress-wrap"><div class="progress" style="width: 25%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/interclg.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">101 Flow state</div><div class="event-title">Inter college Dance</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Main Building Quadrangle</div><div class="item"><span class="dot green"></span>Team size:5-15 members</div><div class="item"><span class="dot blue"></span>Participation:Multiple teams per college</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️29 January 2026</div><div class="time">⏰10:00 AM - 12:30 PM</div><div class="progress-wrap"><div class="progress" style="width: 50%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/caricature.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">102 Toon &amp; me</div><div class="event-title">Cartooning</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Between Main &amp; IT Building </div><div class="item"><span class="dot green"></span>Team size:1 member</div><div class="item"><span class="dot blue"></span>Participation:1 student per class
+</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️29 January 2026</div><div class="time">⏰10:00 AM - 12:00 PM</div><div class="progress-wrap"><div class="progress" style="width: 50%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/doodling.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">103 Dora -The doodler</div><div class="event-title">
+Doodling competition</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Between Main &amp; IT Building </div><div class="item"><span class="dot green"></span>Team size:1 member</div><div class="item"><span class="dot blue"></span>Participation:1 student per class</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️29 January 2026</div><div class="time">⏰12:30 PM - 2:30 PM</div><div class="progress-wrap"><div class="progress" style="width: 50%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/trashion.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">104  Fit Check: Eco Edition</div><div class="event-title">
+Trashion </div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Main Building Quadrangle</div><div class="item"><span class="dot green"></span>Team size:3 members</div><div class="item"><span class="dot blue"></span>Participation:1 team per class</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️29 January 2026</div><div class="time">⏰1:00 PM - 3:00 PM</div><div class="progress-wrap"><div class="progress" style="width: 50%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/streetdance.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">105 ABCD-All about Cummins Dance </div><div class="event-title">Street Dance</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Stage 2</div><div class="item"><span class="dot green"></span>Team size:1 member</div><div class="item"><span class="dot blue"></span>Participation:1 participant per class</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️29 January 2026</div><div class="time">⏰2:00 PM - 4:00 PM</div><div class="progress-wrap"><div class="progress" style="width: 50%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/btech.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">106 AURA: The Inter-Class Runway</div><div class="event-title">Btech Fashion Show</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Samstha Ground</div><div class="item"><span class="dot green"></span>Team size:18 - 21 </div><div class="item"><span class="dot blue"></span>Participation:1 Team/Btech Class
+</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️29 January 2026</div><div class="time">⏰5:00 PM - 8:00 PM</div><div class="progress-wrap"><div class="progress" style="width: 50%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/quiz.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">201 LOL Sabha</div><div class="event-title">Meme Quiz</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Main Building Quadrangle</div><div class="item"><span class="dot green"></span>Team size: 5 members</div><div class="item"><span class="dot blue"></span>Participation:1 team per class</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️30 January 2026</div><div class="time">⏰10:00 AM - 12:00 PM</div><div class="progress-wrap"><div class="progress" style="width: 75%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/solodance.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">202  The One Where I Dance </div><div class="event-title">
+Solo Dance</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Stage 2</div><div class="item"><span class="dot green"></span>Team size: 1 member</div><div class="item"><span class="dot blue"></span>Participation:1 participant per class</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️30 January 2026</div><div class="time">⏰11:00 AM - 2:00 PM</div><div class="progress-wrap"><div class="progress" style="width: 75%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/makeup.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">203 Kasauti MakeUp Ki </div><div class="event-title">
+Makeup Competiton</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Mech Circle</div><div class="item"><span class="dot green"></span>Team size: 2 members</div><div class="item"><span class="dot blue"></span>Participation:1 team per class</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️30 January 2026</div><div class="time">⏰11:00 AM - 1:00 PM</div><div class="progress-wrap"><div class="progress" style="width: 75%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/mafia.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">204 Traitors</div><div class="event-title">Mafia </div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Entire IT Building</div><div class="item"><span class="dot green"></span>Team size:40 players total</div><div class="item"><span class="dot blue"></span>Participation:10 participants from each year</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️30 January 2026</div><div class="time">⏰11:00 AM - 1:00 PM</div><div class="progress-wrap"><div class="progress" style="width: 75%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/masterchef.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">205  Brooklyn Fine-Dine</div><div class="event-title">
+Masterchef Competition</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Between Main &amp; IT Building </div><div class="item"><span class="dot green"></span>Team size:2-4 members</div><div class="item"><span class="dot blue"></span>Participation:1 team per class</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️30 January 2026</div><div class="time">⏰10:00 AM - 2:00 PM</div><div class="progress-wrap"><div class="progress" style="width: 75%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/misscummins.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">206 Cummins  Next Supermodel</div><div class="event-title">Miss Cummins -Beauty Contest</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Main Building Quad</div><div class="item"><span class="dot green"></span>Team size:2 members</div><div class="item"><span class="dot blue"></span>Participation:1 team/cls</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️30 January 2026</div><div class="time">⏰2:00 PM - 4:30 PM</div><div class="progress-wrap"><div class="progress" style="width: 75%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/artrelay.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">207  Pass the Brush</div><div class="event-title">Art Relay</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Between Main &amp; IT Building </div><div class="item"><span class="dot green"></span>Team size:3 members </div><div class="item"><span class="dot blue"></span>Participation:1 team per class</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️30 January 2026</div><div class="time">⏰2:30 PM - 4:30 PM</div><div class="progress-wrap"><div class="progress" style="width: 75%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/grpsinging.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">208 Campus Idol – Group Edition</div><div class="event-title">Group Singing</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:KB Joshi Audi</div><div class="item"><span class="dot green"></span>Team size:2-5 members</div><div class="item"><span class="dot blue"></span>Participation:1 team per class</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️30 January 2026</div><div class="time">⏰2:00 PM - 4:00 PM</div><div class="progress-wrap"><div class="progress" style="width: 75%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/micintheopen.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">209 Dear Diary</div><div class="event-title"> 
+Narrative Story,Standup,Monologue</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Stage 2</div><div class="item"><span class="dot green"></span>Team size:1 member</div><div class="item"><span class="dot blue"></span>Participation:1 student per class</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️30 January 2026</div><div class="time">⏰3:00 PM - 5:00 PM</div><div class="progress-wrap"><div class="progress" style="width: 75%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/classical.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">301  Taal Tarang</div><div class="event-title">
+Classical Dance</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:KB Joshi Auditorium </div><div class="item"><span class="dot green"></span>Team size:1-5 members</div><div class="item"><span class="dot blue"></span>Participation:1 team per class</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️31 January 2026</div><div class="time">⏰10:00 AM - 1:00 PM</div><div class="progress-wrap"><div class="progress" style="width: 100%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/admad.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">302 Pitch Perfect </div><div class="event-title">Advertisement Competition</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Main Buidling Quad </div><div class="item"><span class="dot green"></span>Team size:4-6 members</div><div class="item"><span class="dot blue"></span>Participation:1 team per class</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️31 January 2026</div><div class="time">⏰10:00AM - 1:00 PM</div><div class="progress-wrap"><div class="progress" style="width: 100%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/drama.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">303 TRP Talkies</div><div class="event-title">
+Inter Class drama Competition</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Main Building Quadrangle</div><div class="item"><span class="dot green"></span>Team size:5-10 members</div><div class="item"><span class="dot blue"></span>Participation:20 teams(FCFC)</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️31 January 2026</div><div class="time">⏰1:00 PM - 4:30 PM</div><div class="progress-wrap"><div class="progress" style="width: 100%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/nukkadnatak.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">304  Nukkadnama</div><div class="event-title">
+Inter College Nukkad Natak</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Stage 2</div><div class="item"><span class="dot green"></span>Team size:8-20 members</div><div class="item"><span class="dot blue"></span>Participation:Multiple teams from same college</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️31 January 2026</div><div class="time">⏰12:00 PM - 4:00 PM</div><div class="progress-wrap"><div class="progress" style="width: 100%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/rangoli.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">305  Yeh Rang Kya Kehlate Hain</div><div class="event-title">Rangoli competition</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Between Main &amp; IT Building </div><div class="item"><span class="dot green"></span>Team size:2 members</div><div class="item"><span class="dot blue"></span>Participation:1 Team/cls</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️31 January 2026</div><div class="time">⏰12:00 PM - 3:00 PM</div><div class="progress-wrap"><div class="progress" style="width: 100%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/kalakarkatta.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">306 Kalakaar Katta</div><div class="event-title">Exhibition</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Instrumentation Quadrangle</div><div class="item"><span class="dot green"></span>Live Performance</div><div class="item"><span class="dot blue"></span>Participation:Any student</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️31 January 2026</div><div class="time">⏰11:00 AM - 5:00 PM</div><div class="progress-wrap"><div class="progress" style="width: 100%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div><div class="card"><div class="bg" style="background-image: url(&quot;/images/bestoutofwaste.png&quot;);"></div><div class="logo"><img alt="logo" src="./eventsgridpg_files/logo.png"></div><div class="info-panel"><div class="left"><div class="event-code">307  Junk Genius</div><div class="event-title">
+Best out of Waste</div><div class="legend"><div class="item"><span class="dot red"></span>Venue:Mech Circle</div><div class="item"><span class="dot green"></span>Team size:1-2 members</div><div class="item"><span class="dot blue"></span>Participation:1 team per class</div></div></div><div class="right"><div class="live-pill">LIVE ON</div><div class="date">🗓️31 January 2026</div><div class="time">⏰1:00 PM - 3:00 PM</div><div class="progress-wrap"><div class="progress" style="width: 100%;"></div></div><button class="details-box "><span class="dot yellow"></span>Register</button></div></div></div></div></div>
+    <script type="module" src="./eventsgridpg_files/main.jsx"></script>
+  
+
+</body></html>

@@ -1,8 +1,200 @@
+
+@font-face {
+    font-family: 'Quinlliyk';
+    src: url('fonts/Quinlliyk-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
-  margin: 0;
-  min-height: 100vh;
-  background-image: url("../images/bg.png");
-  background-repeat: repeat-y;
-  background-size: 100% 100vh;
-  background-position: top center;
+    font-family: 'Quinlliyk', sans-serif;
+}
+
+.tv-page {
+    min-height: 100vh;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tv-frame {
+    width: 92vw;
+    max-width: 1400px;
+    background: linear-gradient(#3a2316, #2a160c);
+    border-radius: 28px;
+    padding: 18px;
+    box-shadow: inset 0 0 40px #000,
+        0 40px 80px rgba(0, 0, 0, 0.9);
+}
+
+.tv-screen {
+    position: relative;
+    background: #1a1a1a;
+    border-radius: 18px;
+    overflow: hidden;
+    height: 72vh;
+}
+
+.broadcast-content {
+    /* Ensure the container is a flex column */
+    display: flex;
+    flex-direction: column;
+
+    /* Remove 'position: absolute' from this if it's causing issues */
+    position: relative;
+
+    /* This allows the content to grow and scroll */
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    /* Prevent children from shrinking to 0 */
+    align-items: stretch;
+}
+
+/* Event.css */
+.events-page .event-broadcast {
+  background: #008080;
+}
+
+
+
+/* Center floating boxes (Innovation-style but TV themed) */
+.tv-center-box {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(#3b2a1d, #24160e);
+    color: #f3e6c9;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-family: 'Quinlliyk', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    border: 1px solid #1a0f08;
+    box-shadow:
+        inset 0 0 4px rgba(255, 255, 255, 0.15),
+        0 4px 10px rgba(0, 0, 0, 0.8);
+    z-index: 5;
+}
+
+/* Top box */
+.tv-top-box {
+    top: 14px;
+}
+
+/* Bottom box */
+.tv-bottom-box {
+    bottom: 14px;
+    font-size: 0.75rem;
+    opacity: 0.9;
+}
+
+.tv-title {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.tv-footer-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+
+    background: linear-gradient(#3b2a1d, #24160e);
+    color: #f3e6c9;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    border: 1px solid #1a0f08;
+    box-shadow:
+        inset 0 0 3px rgba(255, 255, 255, 0.12),
+        0 2px 6px rgba(0, 0, 0, 0.7);
+
+    max-width: 100%;
+}
+
+
+
+.footer-text {
+    display: flex;
+    flex-direction: column;
+    /* 🔑 allows second line */
+    line-height: 1.5;
+}
+
+/* Icons container */
+.footer-icons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* Icon styling */
+.footer-icons img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    opacity: 0.85;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.footer-icons img:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.footer-line-1 {
+    white-space: nowrap;
+}
+
+.footer-line-2 {
+    font-size: 1rem;
+    opacity: 0.85;
+    white-space: nowrap;
+}
+
+@media (max-width: 1024px) {
+    .tv-footer-box {
+        gap: 20px;
+        font-size: 1rem;
+    }
+
+    .footer-icons img {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+@media (max-width: 600px) {
+    .tv-footer-box {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+        padding: 10px 12px;
+    }
+
+    .footer-text {
+        align-items: center;
+    }
+
+    .footer-line-1 {
+        font-size: 0.9rem;
+    }
+
+    .footer-line-2 {
+        font-size: 0.8rem;
+    }
+
+    .footer-icons {
+        justify-content: center;
+    }
+
+    .footer-icons img {
+        width: 20px;
+        height: 20px;
+    }
 }

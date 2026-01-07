@@ -1,0 +1,388 @@
+:root {
+  --card-w: 380px;
+  --card-h: 420px;
+}
+
+
+
+body {
+  background: #008080;
+  font-family: "Roboto", sans-serif;
+}
+
+/* === MAIN LAYOUT === */
+.events-layout {
+  display: flex;
+  gap: 50px;
+  padding: 40px;
+}
+
+/* === LEFT FILTER === */
+.day-filter {
+  width: 200px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(14px);
+  border-radius: 16px;
+  padding: 20px;
+  color: #fff;
+  height: fit-content;
+}
+
+.day-filter h3 {
+  font-size: 13px;
+  letter-spacing: 1.4px;
+  margin-bottom: 14px;
+  opacity: 0.85;
+}
+
+.day-filter button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-weight: 600;
+
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.day-filter button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.day-filter button.active {
+  background: linear-gradient(135deg, #ffd600, #ffb300);
+  color: #111;
+  transform: scale(1.03);
+}
+
+/* === GRID RIGHT === */
+.events-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 36px;
+  justify-items: center;
+}
+
+/* === CARD === */
+.card {
+  width: var(--card-w);
+  height: var(--card-h);
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+
+  background: linear-gradient(#000, #000) padding-box,
+    linear-gradient(135deg, #c0c0c0, #c0c0c0) border-box;
+  border: 2px solid transparent;
+
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 40px 90px rgba(255, 0, 85, 0.45);
+}
+
+/* BG */
+.bg {
+  position: absolute;
+  inset: 0;
+  height: 60%;
+  background-size: cover;
+  background-position: center;
+}
+
+/* LOGO */
+.logo {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 255, 255, 0.45),
+    rgba(0, 0, 0, 0.6)
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo img {
+  width: 42px;
+}
+
+/* INFO PANEL */
+.info-panel {
+  position: absolute;
+  left: 11px;
+  right: 14px;
+  bottom: 14px;
+  height: 155px;
+  background: rgba(20, 20, 20, 0.45);
+  backdrop-filter: blur(14px);
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  gap: 20px;
+  color: #fff;
+}
+
+/* LEFT */
+.left {
+  flex: 1;
+}
+
+.event-code {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.event-title {
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.legend {
+  font-family: "Roboto", sans-serif;
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.red { background: #e53935; }
+.green { background: #2ecc71; }
+.blue { background: #2196f3; }
+.yellow { background: #fdd835; }
+
+/* RIGHT */
+.right {
+  width: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 11px;
+}
+
+.live-pill {
+  background: #ff2c3d;
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-size: 10px;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.date { background: rgba(255, 255, 255, 0.12); 
+  font-size: 10.8px; 
+  font-weight: 700;
+   letter-spacing: 1.4px;
+    text-transform: uppercase;
+     color:#ffffff;
+    text-align: center; }
+
+.time {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  font-size: 11px;
+  padding: 4px 8px;
+  width:130px;
+  text-align: center;
+}
+
+.progress-wrap {
+  width: 110px;
+  height: 9px;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 2px;
+  border-radius: 20px;
+}
+
+.progress {
+  height: 100%;
+  background: linear-gradient(90deg, #00ff7f, #00cc44);
+  border-radius: 20px;
+}
+
+/* BUTTON */
+.details-box {
+  width: 110px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #000; 
+  font-size: 13px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #ffffff, #f2f2f2);
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  animation: breathe 1s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  50% {
+    box-shadow: 0 0 14px rgba(255, 200, 0, 0.75);
+    transform: scale(1.03);
+  }
+}
+
+.date-filter {
+  width: 140px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(14px);
+  border-radius: 16px;
+  padding: 10px;
+  color: #fff;
+  height: fit-content;
+}
+
+.date-filter h3 {
+  font-size: 12px;
+  text-align: center;
+  letter-spacing: 1.5px;
+  margin-bottom: 14px;
+  opacity: 0.85;
+}
+
+.date-filter button {
+  width: 100%;
+  padding: 9px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-weight: 600;
+}
+
+.date-filter button.active {
+  background: linear-gradient(135deg, #ffd600, #ffb300);
+  color: #111;
+}
+
+@media (max-width: 768px) {
+
+  .events-layout {
+    flex-direction: column;
+    padding: 12px;
+    gap: 20px;
+  }
+
+  .events-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    justify-items: center;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .date-filter {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 260px;
+    height: 100vh;
+    z-index: 9999;
+    transition: right 0.35s ease;
+  }
+
+  .date-filter.show {
+    right: 0;
+  }
+
+  /* Hide filter by default */
+  .date-filter {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 260px;
+    height: 100vh;
+    z-index: 9999;
+    transition: right 0.35s ease;
+    box-shadow: -20px 0 50px rgba(0,0,0,0.6);
+  }
+
+  .date-filter.show {
+    right: 0;
+  }
+
+  /* Filter toggle button */
+  .filter-toggle {
+    position: fixed;
+    top: 80px;
+    right: 24px;
+    z-index: 9000;
+
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    border: none;
+
+    font-size: 22px;
+    font-weight: bold;
+    background: rgba(0,0,0,0.65);
+    color: #fff;
+    cursor: pointer;
+  }
+
+  /* Close button inside filter */
+  .filter-close {
+    display: block;
+    margin-bottom: 12px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+  }
+}
+@media (min-width: 769px) {
+  .filter-toggle,
+  .filter-close {
+    display: none;
+  }
+}
+
