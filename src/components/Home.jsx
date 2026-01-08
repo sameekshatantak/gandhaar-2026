@@ -20,6 +20,8 @@ import Header from "./Header";
 import Navbar from "./Navbar";
 import StarLineUp from "./StarLineUp";
 import StarReveal from "./StarReveal";
+import HomeEvent from "./HomeEvent";
+import Schedule from "./Schedule";
 
 let GLOBAL_MUTED = false;
 
@@ -27,18 +29,18 @@ let GLOBAL_MUTED = false;
 function Home() {
   const location = useLocation();
 
-useEffect(() => {
-  if (location.state?.scrollTo) {
-    const el = document.getElementById(location.state.scrollTo);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      const el = document.getElementById(location.state.scrollTo);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
     }
-  }
-}, [location]);
+  }, [location]);
 
   return (
     <div className="main-container">
-      
+
       {/* REMOTE / NAVBAR */}
       <div className="remote-area">
         <Navbar />
@@ -51,16 +53,15 @@ useEffect(() => {
         <div className="screen-container">
           <div className="crt-overlay"></div>
 
-          {/* TOP CENTER BOX */}
-          <div className="tv-center-box tv-top-box">
-            <span className="tv-title">GANDHAAR 2026</span>
-          </div>
 
           {/* 📡 BROADCAST CONTENT */}
           <div className="broadcast-content" id="home">
 
             {/* HOME */}
-            <Header/>
+            <section id="header">
+              <Header />
+            </section>
+
 
             {/* THEMES */}
             <GrainWrapper bgColor="#f57f5b">
@@ -69,20 +70,33 @@ useEffect(() => {
               </section>
             </GrainWrapper>
 
+            {/* HOME EVENTS */}
+            <GrainWrapper bgColor="#FACA78">
+              <section id="homeevent">
+                <HomeEvent />
+
+              </section>
+            </GrainWrapper>
             {/* EVENTS */}
             <GrainWrapper bgColor="#dd5341">
-              <section id="events">
-  <StarReveal />
+              <section id="lineup">
+                <StarReveal />
 
               </section>
             </GrainWrapper>
 
             {/* STAR LINEUP */}
             <GrainWrapper bgColor="#794a3a">
-              <section id="lineup">
-                <StarLineUp />
-              </section>
+
+              <StarLineUp />
+
             </GrainWrapper>
+
+            <section id="schedule">
+              <Schedule />
+            </section>
+
+
 
             {/* ABOUT US */}
             <GrainWrapper bgColor="#1E1A16">
@@ -146,7 +160,7 @@ useEffect(() => {
         </div>
 
       </div>
-    </div>
+    </div >
   );
 }
 

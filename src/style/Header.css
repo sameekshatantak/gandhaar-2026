@@ -1,250 +1,572 @@
-
-
-:root {
-  /* ===== SIZE CONTROLS ===== */
-  --disk-size: 610px;
-  --tv-width: 1610px;
-}
-
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  background: #111;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  perspective: 2000px; /* enables real depth perception */
+/* =========================================================
+   VISIBILITY CONTROL
+========================================================= */
+#desktop-layout {
+  display: block;
 }
 
-.scene {
-  position: relative;
-  width: 1920px;
-  height: 1080px;
+#mobile-layout {
+  display: none;
 }
 
-/* BACKGROUND */
-.bg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+@media (max-width: 768px) {
+  #desktop-layout {
+    display: none;
+  }
+
+  #mobile-layout {
+    display: block;
+  }
 }
 
-/* =========================
+/* =========================================================
+   ================= WEBSITE CSS =================
+   (UNCHANGED – YOUR ORIGINAL)
+========================================================= */
+@media (min-width: 769px) {
+
+  /* 🔥 PASTE YOUR FULL WEBSITE CSS HERE
+     (EXACTLY as you shared, no edits)
+  */
+
+  :root {
+    /* ===== SIZE CONTROLS ===== */
+    --disk-size: 575px;
+    --tv-width: 1290px;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+
+
+  .scene {
+    position: relative;
+    width: 1920px;
+    height: 700px;
+  }
+
+  /* BACKGROUND */
+  .bg1 {
+    position: absolute;
+    inset: 0;
+    width: 1920px;
+    height: 1080px;
+    z-index: 1;
+  }
+
+  /* =========================
    DISK — STRONG 3D DEPTH
 ========================= */
-.disk {
-  position: absolute;
-  width: var(--disk-size);
-  height: var(--disk-size);
-  left: 130px;
-  top: 350px;
-  z-index: 3;
+  .disk {
+    position: absolute;
+    width: var(--disk-size);
+    height: var(--disk-size);
+    left: 120px;
+    top: 10px;
+    z-index: 3;
 
-  animation: spin 14s linear infinite;
-  transform-origin: center center;
-  transform-style: preserve-3d;
+    animation: spin 14s linear infinite;
+    transform-origin: center center;
+    transform-style: preserve-3d;
 
-  /* MULTI-LAYER SHADOW (REALISTIC DEPTH) */
-  filter:
-    drop-shadow(0 18px 18px rgba(0,0,0,0.35))
-    drop-shadow(0 40px 50px rgba(0,0,0,0.45))
-    drop-shadow(0 80px 90px rgba(0,0,0,0.35));
+    /* MULTI-LAYER SHADOW (REALISTIC DEPTH) */
+    filter:
+      drop-shadow(0 18px 18px rgba(0, 0, 0, 0.35)) drop-shadow(0 40px 50px rgba(0, 0, 0, 0.45)) drop-shadow(0 80px 90px rgba(0, 0, 0, 0.35));
 
-  transition: transform 0.4s ease;
-}
+    transition: transform 0.4s ease;
+  }
 
-/* GROUND SHADOW (CONTACT) */
-.disk::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(0,0,0,0.55) 0%,
-    rgba(0,0,0,0.35) 35%,
-    transparent 70%
-  );
-  transform: translateZ(-80px) scale(1.15);
-  filter: blur(30px);
-  z-index: -1;
-}
+  /* GROUND SHADOW (CONTACT) */
+  .disk::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center,
+        rgba(0, 0, 0, 0.55) 0%,
+        rgba(0, 0, 0, 0.35) 35%,
+        transparent 70%);
+    transform: translateZ(-80px) scale(1.15);
+    filter: blur(30px);
+    z-index: -1;
+  }
 
-.disk:hover {
-  transform: translateZ(60px) scale(1.02);
-}
+  .disk:hover {
+    transform: translateZ(60px) scale(1.02);
+  }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
 
-/* =========================
+  /* =========================
    TV STACK — HEAVY 3D PRESENCE
 ========================= */
-.tv {
-  position: absolute;
-  width: var(--tv-width);
-  height: auto;
-  left: 160px;
-  top: 186px;
-  z-index: 8;
+  .tv {
+    position: absolute;
+    width: var(--tv-width);
+    height: auto;
+    left: 230px;
+    top: -30px;
+    z-index: 8;
 
-  transform-style: preserve-3d;
+    transform-style: preserve-3d;
 
-  /* CINEMATIC DEPTH SHADOW */
-  filter:
-    drop-shadow(0 25px 30px rgba(0,0,0,0.45))
-    drop-shadow(0 60px 80px rgba(0,0,0,0.55))
-    drop-shadow(0 120px 140px rgba(0,0,0,0.45));
+    /* CINEMATIC DEPTH SHADOW */
+    filter:
+      drop-shadow(0 25px 30px rgba(0, 0, 0, 0.45)) drop-shadow(0 60px 80px rgba(0, 0, 0, 0.55)) drop-shadow(0 120px 140px rgba(0, 0, 0, 0.45));
 
-  transition: transform 0.4s ease;
-}
+    transition: transform 0.4s ease;
+  }
 
-/* BASE CONTACT SHADOW */
-.tv::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.6),
-    transparent 70%
-  );
-  transform: translateZ(-120px) scale(1.1);
-  filter: blur(45px);
-  z-index: -1;
-}
+  /* BASE CONTACT SHADOW */
+  .tv::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+        rgba(0, 0, 0, 0.6),
+        transparent 70%);
+    transform: translateZ(-120px) scale(1.1);
+    filter: blur(45px);
+    z-index: -1;
+  }
 
-.tv:hover {
-  transform: translateZ(80px) translateY(-10px);
-}
+  .tv:hover {
+    transform: translateZ(80px) translateY(-10px);
+  }
 
 
-/* =========================
+
+  /* =========================
    VISIBLE POP-UP ON HOVER
 ========================= */
 
-/* TV STACK POP-UP */
-.tv:hover {
-  transform: translateZ(20px) scale(1.02); /* slightly bigger + lifted */
-  transition: transform 0.25s ease-out;
-}
+  /* TV STACK POP-UP */
+  .tv:hover {
+    transform: translateZ(20px) scale(1.02);
+    /* slightly bigger + lifted */
+    transition: transform 0.25s ease-out;
+  }
 
-/* DISK POP-UP */
-.disk:hover {
-  transform: translateZ(20px) scale(1.04); /* slightly bigger + lifted */
-  transition: transform 0.25s ease-out;
-}
+  /* DISK POP-UP */
+  .disk:hover {
+    transform: translateZ(20px) scale(1.04);
+    /* slightly bigger + lifted */
+    transition: transform 0.25s ease-out;
+  }
 
-/* =========================
+  /* =========================
    WORD IMAGE ON TOP OF DISK
 ========================= */
-.disk-word {
-  position: absolute;
-  left: 26%;           /* center horizontally over disk */
-  top: 60%;            /* center vertically over disk */
-  transform: translate(-50%, -50%);
-  width: 600px;        /* adjust based on your word image size */
-  z-index: 12;         /* make sure it’s above disk */
-  
-  filter: drop-shadow(0 0 15px #f4f3bb) brightness(1.2);
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
+  .disk-word {
+    position: absolute;
+    left: 410px;
+    /* center horizontally over disk */
+    top: 295px;
+    /* center vertically over disk */
+    transform: translate(-50%, -50%);
+    width: 600px;
+    /* adjust based on your word image size */
+    z-index: 12;
+    /* make sure it’s above disk */
 
-/* POP-UP ON HOVER (optional) */
-.disk-word:hover {
-  transform: translate(-50%, -50%) translateZ(20px) scale(1.05);
-  filter: drop-shadow(0 0 25px #FFD700) brightness(1.4);
-}
+    filter: drop-shadow(0 0 15px #f4f3bb) brightness(1.2);
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
 
-/* =========================
+  /* POP-UP ON HOVER (optional) */
+  .disk-word:hover {
+    transform: translate(-50%, -50%) translateZ(20px) scale(1.05);
+    filter: drop-shadow(0 0 25px #FFD700) brightness(1.4);
+  }
+
+  /* =========================
    SECOND WORD IMAGE ON DISK
 ========================= */
-.disk-word-2 {
-  position: absolute;
-  left: 26%;           /* center horizontally */
-  top: 68%;            /* adjust vertically below or above first word */
-  transform: translate(-50%, -50%);
-  width: 220px;        /* adjust size as needed */
-  z-index: 12;         /* above disk */
+  .disk-word-2 {
+    position: absolute;
+    left: 405px;
+    /* center horizontally */
+    top: 390px;
+    /* adjust vertically below or above first word */
+    transform: translate(-50%, -50%);
+    width: 220px;
+    /* adjust size as needed */
+    z-index: 12;
+    /* above disk */
 
-  filter: drop-shadow(0 0 15px #00FFFF) brightness(1.2);
-  transition: transform 0.3s ease, filter 0.3s ease;
+    filter: drop-shadow(0 0 15px #00FFFF) brightness(1.2);
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+
+  /* Optional small pop-up on hover */
+  .disk-word-2:hover {
+    transform: translate(-50%, -50%) translateZ(20px) scale(1.05);
+    filter: drop-shadow(0 0 25px #00FFFF) brightness(1.4);
+  }
+
+  .tv-video {
+    position: absolute;
+    z-index: 15;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    /* shows it’s clickable */
+  }
+
+  /* Example: video 1 positioning */
+  .tv-video-1 {
+    width: 185px;
+    height: 235px;
+    left: 1075px;
+    top: 395px;
+  }
+
+  /* Example: video 2 positioning */
+  .tv-video-2 {
+    width: 134px;
+    height: 75px;
+    left: 1070px;
+    top: 280px;
+  }
+
+  .tv-video-3 {
+    width: 125px;
+    height: 70px;
+    left: 1053px;
+    top: 125px;
+  }
+
+  /* Example: video 2 positioning tom n jerry*/
+  .tv-video-4 {
+    width: 100px;
+    height: 60px;
+    left: 950px;
+    top: 70px;
+  }
+
+  /* SHINY GLOW ON VIDEO ELEMENTS */
+  .tv-video {
+    position: absolute;
+    z-index: 15;
+    object-fit: cover;
+    border-radius: 4px;
+
+    /* subtle glow */
+    box-shadow:
+      0 0 12px rgba(255, 255, 255, 0.4),
+      /* inner glow */
+      0 0 25px rgba(255, 255, 255, 0.2);
+    /* outer glow */
+
+    cursor: pointer;
+    /* indicate clickable */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  /* Optional: hover effect to enhance glow */
+  .tv-video:hover {
+    box-shadow:
+      0 0 18px rgba(255, 255, 255, 0.6),
+      0 0 35px rgba(255, 255, 255, 0.3);
+    transform: translateZ(10px);
+    /* tiny pop for 3D effect */
+  }
+
+
+
 }
 
-/* Optional small pop-up on hover */
-.disk-word-2:hover {
-  transform: translate(-50%, -50%) translateZ(20px) scale(1.05);
-  filter: drop-shadow(0 0 25px #00FFFF) brightness(1.4);
+/* =========================================================
+   ================= MOBILE CSS =================
+   (UNCHANGED – YOUR ORIGINAL)
+========================================================= */
+@media (max-width: 768px) {
+
+  /* 🔥 PASTE YOUR FULL MOBILE CSS HERE
+     (EXACTLY as you shared, no edits)
+  */
+  :root {
+    /* DISK POSITION & SIZE */
+    --disk-width: 350px;
+    --disk-height: 350px;
+    --disk-left: -20px;
+    --disk-top: -155px;
+
+    /* WORDS ON DISK */
+    --disk-word-width: 315px;
+    --disk-word-left: 157px;
+    --disk-word-top: 30px;
+
+    --disk-word2-width: 120px;
+    --disk-word2-left: 160px;
+    --disk-word2-top: 85px;
+
+    /* TV STACK */
+    --tv-width: 300px;
+    --tv-left: 5px;
+    --tv-top: 150px;
+
+    /*VIDEOS */
+    --video1-width: 110px;
+    --video1-height: 140px;
+    --video1-left: 168px;
+    --video1-top: 500px;
+
+    --video2-width: 75px;
+    --video2-height: 40px;
+    --video2-left: 155px;
+    --video2-top: 340px;
+
+    --video3-width: 80px;
+    --video3-height: 40px;
+    --video3-left: 165px;
+    --video3-top: 434px;
+
+    --video4-width: 60px;
+    --video4-height: 33px;
+    --video4-left: 95px;
+    --video4-top: 307px;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #111;
+    /*display: flex;
+  justify-content: center;
+  align-items: center;*/
+    perspective: 2000px;
+  }
+
+  /* SCENE */
+  .scene {
+    position: relative;
+    width: 100vw;
+    height: 200vw;
+    overflow: hiddden;
+    perspective: 2000px;
+  }
+
+  /* BACKGROUND */
+  .bg1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 1;
+  }
+
+  /* DISK */
+  .disk {
+    position: absolute;
+    z-index: 3;
+    width: var(--disk-width);
+    height: var(--disk-height);
+    left: var(--disk-left);
+    top: var(--disk-top);
+
+    animation: spin 14s linear infinite;
+
+    filter:
+      drop-shadow(0 18px 18px rgba(0, 0, 0, 0.35)) drop-shadow(0 40px 50px rgba(0, 0, 0, 0.45)) drop-shadow(0 80px 90px rgba(0, 0, 0, 0.35));
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* WORDS ON DISK */
+  .disk-word {
+    position: absolute;
+    z-index: 12;
+    width: var(--disk-word-width);
+    left: var(--disk-word-left);
+    top: var(--disk-word-top);
+    transform: translateX(-50%);
+    filter: drop-shadow(0 0 15px #f4f3bb);
+  }
+
+  .disk-word-2 {
+    position: absolute;
+    z-index: 12;
+    width: var(--disk-word2-width);
+    left: var(--disk-word2-left);
+    top: var(--disk-word2-top);
+    transform: translateX(-50%);
+    filter: drop-shadow(0 0 15px #00ffff);
+  }
+
+  /* TV STACK */
+  .tv {
+    position: absolute;
+    z-index: 8;
+    width: var(--tv-width);
+    left: var(--tv-left);
+    top: var(--tv-top);
+
+    /* 🔥 REQUIRED FIX */
+    transform-style: preserve-3d;
+    will-change: transform;
+    position: relative;
+    /* ADD THIS */
+
+
+    filter:
+      drop-shadow(0 25px 30px rgba(0, 0, 0, 0.45)) drop-shadow(0 60px 80px rgba(0, 0, 0, 0.55)) drop-shadow(0 120px 140px rgba(0, 0, 0, 0.45));
+  }
+
+  /* VIDEOS */
+  .tv-video {
+    position: absolute;
+    z-index: 15;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow:
+      0 0 12px rgba(255, 255, 255, 0.4),
+      0 0 25px rgba(255, 255, 255, 0.2);
+  }
+
+  /* VIDEO VARIABLES */
+  .tv-video-1 {
+    width: var(--video1-width);
+    height: var(--video1-height);
+    left: var(--video1-left);
+    top: var(--video1-top);
+  }
+
+  .tv-video-2 {
+    width: var(--video2-width);
+    height: var(--video2-height);
+    left: var(--video2-left);
+    top: var(--video2-top);
+  }
+
+  .tv-video-3 {
+    width: var(--video3-width);
+    height: var(--video3-height);
+    left: var(--video3-left);
+    top: var(--video3-top);
+  }
+
+  .tv-video-4 {
+    width: var(--video4-width);
+    height: var(--video4-height);
+    left: var(--video4-left);
+    top: var(--video4-top);
+  }
+
+  .tv-video {
+    pointer-events: auto;
+  }
+
+  .tv {
+    pointer-events: auto;
+  }
+
+
+
+  /* ===============================
+   🎬 SUBTLE 3D TV POP
+================================ */
+
+  .tv {
+    transform-style: preserve-3d;
+    transform: translateZ(20px) rotateX(4deg);
+    transition:
+      transform 0.28s ease-out,
+      filter 0.28s ease-out;
+
+    filter:
+      drop-shadow(0 18px 22px rgba(0, 0, 0, 0.45)) drop-shadow(0 45px 65px rgba(0, 0, 0, 0.55));
+  }
+
+  /* Gentle pop on touch */
+  .tv.pop {
+    transform: translateZ(55px) scale(1.015);
+    filter:
+      drop-shadow(0 28px 35px rgba(0, 0, 0, 0.55)) drop-shadow(0 75px 95px rgba(0, 0, 0, 0.65));
+  }
+
+  /* Mobile friendly */
+  .tv {
+    touch-action: manipulation;
+  }
+
+  /* ===============================
+   🕶️ DEEP 3D SHADOW BEHIND TV
+================================ */
+
+  .tv::before {
+    content: "";
+    position: absolute;
+    inset: -20px;
+    z-index: -2;
+
+    background: radial-gradient(ellipse at center,
+        rgba(0, 0, 0, 0.55),
+        rgba(0, 0, 0, 0.25),
+        transparent 70%);
+
+    filter: blur(35px);
+
+    transform:
+      translateY(45px) scale(1.15);
+
+    border-radius: 30px;
+  }
+
+  /* Enhance shadow when TV pops */
+  .tv.pop::before {
+    filter: blur(40px);
+    transform:
+      translateZ(-90px) translateY(55px) scale(1.12);
+  }
+
+  /* ===============================
+   ✨ WORD POP & HIGHLIGHT
+================================ */
+
+  .disk-word,
+  .disk-word-2 {
+    transition:
+      transform 0.35s ease,
+      filter 0.35s ease;
+    touch-action: manipulation;
+  }
+
+  /* Active pop state */
+  .word-pop {
+    transform: translateX(-50%) translateZ(40px) scale(1.08);
+    filter:
+      drop-shadow(0 0 18px rgba(255, 255, 200, 0.9)) drop-shadow(0 0 35px rgba(255, 255, 200, 0.7)) brightness(1.35);
+  }
+
 }
-
-.tv-video {
-  position: absolute;
-  z-index: 15;
-  object-fit: cover;
-  border-radius: 4px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.5);
-  cursor: pointer; /* shows it’s clickable */
-}
-
-/* Example: video 1 positioning */
-.tv-video-1 {
-  width: 240px;
-  height: 290px;
-  left: 1210px;
-  top: 710px;
-}
-
-/* Example: video 2 positioning */
-.tv-video-2 {
-  width: 164px;
-  height: 90px;
-  left: 1183px;
-  top: 380px;
-}
-
-.tv-video-3 {
-  width: 120px;
-  height: 85px;
-  left: 1217px;
-  top: 575px;
-}
-
-/* Example: video 2 positioning tom n jerry*/
-.tv-video-4 {
-  width: 120px;
-  height: 80px;
-  left: 1060px;
-  top: 315px;
-}
-
-/* SHINY GLOW ON VIDEO ELEMENTS */
-.tv-video {
-  position: absolute;
-  z-index: 15;
-  object-fit: cover;
-  border-radius: 4px;
-
-  /* subtle glow */
-  box-shadow:
-    0 0 12px rgba(255, 255, 255, 0.4),  /* inner glow */
-    0 0 25px rgba(255, 255, 255, 0.2);  /* outer glow */
-
-  cursor: pointer; /* indicate clickable */
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-/* Optional: hover effect to enhance glow */
-.tv-video:hover {
-  box-shadow:
-    0 0 18px rgba(255, 255, 255, 0.6),
-    0 0 35px rgba(255, 255, 255, 0.3);
-  transform: translateZ(10px); /* tiny pop for 3D effect */
-}
-
-

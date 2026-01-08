@@ -1,96 +1,145 @@
 import { useEffect } from "react";
 import "../style/Header.css";
+import bg from '../assets/images/header/bg.jpeg';
+import bgg from '../assets/images/header/bgg.jpg';
+import disk from '../assets/images/header/disk.png';
+import tv from '../assets/images/header/tv.png';
+import tv1 from '../assets/images/header/tv1.png';
+import word from '../assets/images/header/word.png';
+import word2 from '../assets/images/header/word2.png';
 
-export default function Header() {
+
+export default function Home() {
   useEffect(() => {
-    // ===============================
-    // VIDEO HOVER AUDIO LOGIC
-    // ===============================
-    const tvVideos = document.querySelectorAll(".tv-video");
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-    tvVideos.forEach((video) => {
-      const onEnter = () => {
-        video.muted = false;
-        video.volume = 1;
-        video.play();
-      };
+    if (isMobile) {
+      runMobileJS();
+    } else {
+      runWebsiteJS();
+    }
 
-      const onLeave = () => {
-        video.muted = true;
-      };
+    const handleResize = () => location.reload();
+    window.addEventListener("resize", handleResize);
 
-      video.addEventListener("mouseenter", onEnter);
-      video.addEventListener("mouseleave", onLeave);
-
-      return () => {
-        video.removeEventListener("mouseenter", onEnter);
-        video.removeEventListener("mouseleave", onLeave);
-      };
-    });
-
-    // ===============================
-    // 3D SCENE PARALLAX
-    // ===============================
-    const scene = document.querySelector(".scene");
-    const disk = document.querySelector(".disk");
-    const tv = document.querySelector(".tv");
-
-    if (!scene || !disk || !tv) return;
-
-    const handleMove = (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 30;
-      const y = (e.clientY / window.innerHeight - 0.5) * 30;
-
-      scene.style.transform = `
-        rotateY(${x}deg)
-        rotateX(${-y}deg)
-      `;
-
-      disk.style.transform = `
-        translateZ(120px)
-        rotateZ(${Date.now() * 0.03}deg)
-      `;
-
-      tv.style.transform = `
-        translateZ(200px)
-        translateY(-10px)
-      `;
-    };
-
-    const handleLeave = () => {
-      scene.style.transform = "rotateX(0deg) rotateY(0deg)";
-      disk.style.transform = "translateZ(0)";
-      tv.style.transform = "translateZ(0)";
-    };
-
-    scene.addEventListener("mousemove", handleMove);
-    scene.addEventListener("mouseleave", handleLeave);
-
-    return () => {
-      scene.removeEventListener("mousemove", handleMove);
-      scene.removeEventListener("mouseleave", handleLeave);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
-    <div className="header-root">
-      <div className="scene">
-        <img src="../src/assets/images/header/bgg.jpg" className="bg" alt="" />
+    <>
+      {/* =========================================================
+         🌐 WEBSITE LAYOUT (DESKTOP)
+      ========================================================= */}
+      <div id="desktop-layout">
+        <div className="scene">
+          <img src={bgg} className="bg1" />
 
-        {/* WORDS */}
-        <img src="../src/assets/images/header/word.png" className="disk-word" alt="" />
-        <img src="../src/assets/images/header/word2.png" className="disk-word-2" alt="" />
+          <img src={word} className="disk-word" />
+          <img src={word2} className="disk-word-2" />
 
-        {/* OBJECTS */}
-        <img src="../src/assets/images/header/disk.png" className="disk" alt="" />
-        <img src="../src/assets/images/header/tv.png" className="tv" alt="" />
+          <img src={disk} className="disk" />
+          <img src={tv1} className="tv" />
 
-        {/* VIDEOS */}
-        <video className="tv-video tv-video-1" src="../src/assets/videos/video1.mp4" autoPlay muted loop playsInline />
-        <video className="tv-video tv-video-2" src="../src/assets/videos/video2.mp4" autoPlay muted loop playsInline />
-        <video className="tv-video tv-video-3" src="../src/assets/videos/video3.mp4" autoPlay muted loop playsInline />
-        <video className="tv-video tv-video-4" src="../src/assets/videos/video4.mp4" autoPlay muted loop playsInline />
+          <video className="tv-video tv-video-1" src="src/assets/videos/video1.mp4" autoPlay muted loop playsInline />
+          <video className="tv-video tv-video-2" src="src/assets/videos/video2.mp4" autoPlay muted loop playsInline />
+          <video className="tv-video tv-video-3" src="src/assets/videos/video3.mp4" autoPlay muted loop playsInline />
+          <video className="tv-video tv-video-4" src="src/assets/videos/video4.mp4" autoPlay muted loop playsInline />
+        </div>
       </div>
-    </div>
+
+      {/* =========================================================
+         📱 MOBILE LAYOUT
+      ========================================================= */}
+      <div id="mobile-layout">
+        <div className="scene">
+          <img src={bg} className="bg1" />
+
+          <img src={word} className="disk-word" />
+          <img src={word2} className="disk-word-2" />
+
+          <img src={disk} className="disk" />
+          <img src={tv} className="tv" />
+
+          <video className="tv-video tv-video-1" src="src/assets/videos/video1.mp4" autoPlay muted loop playsInline />
+          <video className="tv-video tv-video-2" src="src/assets/videos/video2.mp4" autoPlay muted loop playsInline />
+          <video className="tv-video tv-video-3" src="src/assets/videos/video3.mp4" autoPlay muted loop playsInline />
+          <video className="tv-video tv-video-4" src="src/assets/videos/video4.mp4" autoPlay muted loop playsInline />
+        </div>
+      </div>
+    </>
   );
+}
+
+/* =========================================================
+   🌐 WEBSITE JS (UNCHANGED LOGIC)
+========================================================= */
+function runWebsiteJS() {
+  const scene = document.querySelector("#desktop-layout .scene");
+  if (!scene) return;
+
+  const disk = scene.querySelector(".disk");
+  const tv = scene.querySelector(".tv");
+  const videos = scene.querySelectorAll(".tv-video");
+
+  scene.addEventListener("mousemove", (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 30;
+    const y = (e.clientY / window.innerHeight - 0.5) * 30;
+
+    scene.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+    disk.style.transform = `translateZ(120px) rotate(${Date.now() * 0.03}deg)`;
+    tv.style.transform = `translateZ(200px) translateY(-10px)`;
+  });
+
+  scene.addEventListener("mouseleave", () => {
+    scene.style.transform = "rotateX(0deg) rotateY(0deg)";
+    disk.style.transform = "translateZ(0)";
+    tv.style.transform = "translateZ(0)";
+  });
+
+  videos.forEach((video) => {
+    video.addEventListener("mouseenter", () => {
+      video.muted = false;
+      video.play();
+    });
+
+    video.addEventListener("mouseleave", () => {
+      video.muted = true;
+    });
+  });
+}
+
+/* =========================================================
+   📱 MOBILE JS (UNCHANGED LOGIC)
+========================================================= */
+function runMobileJS() {
+  const scene = document.querySelector("#mobile-layout .scene");
+  if (!scene) return;
+
+  const tv = scene.querySelector(".tv");
+  const videos = scene.querySelectorAll(".tv-video");
+  const words = scene.querySelectorAll(".disk-word, .disk-word-2");
+
+  let popped = false;
+
+  tv.addEventListener("click", () => {
+    popped = !popped;
+    tv.classList.toggle("pop", popped);
+  });
+
+  videos.forEach((video) => {
+    let soundOn = false;
+
+    video.addEventListener("click", () => {
+      soundOn = !soundOn;
+      video.muted = !soundOn;
+      soundOn ? video.play() : video.pause();
+    });
+  });
+
+  words.forEach((word) => {
+    word.addEventListener("click", () => {
+      word.classList.add("word-pop");
+      setTimeout(() => word.classList.remove("word-pop"), 2000);
+    });
+  });
 }

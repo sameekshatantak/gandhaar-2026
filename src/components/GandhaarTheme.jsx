@@ -210,17 +210,17 @@ const GandhaarTheme = () => {
                 <circle cx="25" cy="25" r="23" fill="#aaa" stroke="#777" strokeWidth="2.5" />
                 <circle cx="35" cy="15" r="5" fill="#333" />
               </svg>
-              
+
             </div>
-       
+
           </div>
-              
+
           <div className="tv-speaker-grill"></div>
-          
+
         </div>
-       
+
       </div>
-        <div className="click-hint">Hit VOL, hear the show!</div>
+      <div className="click-hint">Hit VOL, hear the show!</div>
 
       <div className="set-top-box">
         <div className="stb-lights">
@@ -228,8 +228,8 @@ const GandhaarTheme = () => {
           <span className="stb-light yellow"></span>
         </div>
         <Link to="/events" className="stb-cta">
-    CTV
-  </Link>
+          CTV
+        </Link>
 
       </div>
     </div>

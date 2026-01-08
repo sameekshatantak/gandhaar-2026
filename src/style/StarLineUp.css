@@ -270,7 +270,7 @@
     .reveal-section {
         height: auto;
         min-height: 100vh;
-        padding: 20px 10px;
+        padding: 10px 10px;
         /* Force centering of all items in the section */
         display: flex;
         flex-direction: column;
@@ -281,7 +281,7 @@
         /* You had 10vh here, which is very short. 
            Changed to 60vh to actually increase the height. */
         height: 50vh;
-        width: 78vw;
+        width: 68vw;
         /* Using 90vw keeps it balanced on both sides */
 
         /* Centering logic */
