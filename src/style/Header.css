@@ -126,45 +126,6 @@ body {
 
 
 /* =========================
-   TV BOUNCE + FLOAT ON HOVER
-========================= 
-.tv:hover {
-  animation: tvBounce 1s ease-in-out infinite;
-  transform: translateZ(100px) translateY(-15px) rotateY(-15deg);
-}
-
-@keyframes tvBounce {
-  0%, 100% {
-    transform: translateZ(100px) translateY(-15px) rotateY(-15deg);
-  }
-  25% {
-    transform: translateZ(120px) translateY(-20px) rotateY(-18deg);
-  }
-  50% {
-    transform: translateZ(140px) translateY(-25px) rotateY(-12deg);
-  }
-  75% {
-    transform: translateZ(120px) translateY(-20px) rotateY(-18deg);
-  }
-}
-
-/* =========================
-   DISK HOVER POP + DEPTH
-========================= 
-.disk:hover {
-  transform: translateZ(80px) scale(1.05) rotateZ(0deg);
-  animation: diskBounce 1s ease-in-out infinite;
-}
-
-@keyframes diskBounce {
-  0%, 100% { transform: translateZ(80px) scale(1.05) rotateZ(0deg); }
-  25% { transform: translateZ(100px) scale(1.08) rotateZ(10deg); }
-  50% { transform: translateZ(120px) scale(1.1) rotateZ(20deg); }
-  75% { transform: translateZ(100px) scale(1.08) rotateZ(10deg); }
-}
-*/
-
-/* =========================
    VISIBLE POP-UP ON HOVER
 ========================= */
 

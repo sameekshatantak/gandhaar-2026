@@ -179,6 +179,7 @@ const scrollTo = (id) => {
           justify-content: center;
           cursor: pointer;
           color: #fff;
+
         }
 
         .mic-outer {
@@ -281,7 +282,7 @@ const scrollTo = (id) => {
         /* ---------- MOBILE POWER TOGGLE ---------- */
         .mobile-power-toggle {
   position: fixed;
-  bottom: 20px;
+  bottom: 40px;
   right: 20px;              /* 👈 move to right */
   width: 60px;
   height: 60px;

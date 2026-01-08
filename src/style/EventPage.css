@@ -250,6 +250,7 @@ ol li::marker {
 
 /* BUTTON */
 .btn-register {
+    
     background: linear-gradient(
         135deg,
         var(--accent),
@@ -282,5 +283,11 @@ ol li::marker {
     display: flex !important;
     flex-direction: column !important;
     gap: 16px;
+  }
+}
+@media (max-width: 768px) {
+  .btn-register {
+    margin-bottom: 80px; /* 🔥 large on purpose */
+    display: inline-block;
   }
 }
