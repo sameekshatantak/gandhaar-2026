@@ -18,15 +18,15 @@ const DevCrew = () => {
     // 2. MAP DATA TO THE IMPORTED VARIABLES
     const members = [
         { id: 1, name: "Sneha Mukane", img: Mem1 },
-        { id: 2, name: "Riya Morankar", img: Mem2 },
-        { id: 3, name: "Kuhu Kelkar", img: Mem3 },
-        { id: 4, name: "Shruti Bhavsar", img: Mem4 },
         { id: 5, name: "Anushka Ahirrao", img: Mem5 },
+        { id: 2, name: "Riya Morankar", img: Mem2 },
+        { id: 9, name: "Arya Hawaldar", img: Mem9 },
+        { id: 4, name: "Shruti Bhavsar", img: Mem4 },
+        { id: 10, name: "Kajal Israni", img: Mem10 },
+        { id: 8, name: "Manaswi Pensalwar", img: Mem8 },
         { id: 6, name: "Mrunmayi Jawalekar", img: Mem6 },
         { id: 7, name: "Shikha Pawar", img: Mem7 },
-        { id: 8, name: "Manaswi Pensalwar", img: Mem8 },
-        { id: 9, name: "Arya Hawaldar", img: Mem9 },
-        { id: 10, name: "Kajal Israni", img: Mem10 },
+        { id: 3, name: "Kuhu Kelkar", img: Mem3 },    
     ];
 
     return (
