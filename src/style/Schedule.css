@@ -1,0 +1,562 @@
+/* App.css
+   - Place QuinlliykRegular-gx3ME.ttf at /public/assets/QuinlliykRegular-gx3ME.ttf
+   - This file gives Quinlliyk ONLY to title selectors:
+     .page-title, .event-title, .signoff h2
+   - All other text uses the theme font classes (font-sans / font-comic / font-serif / font-serif-wide)
+*/
+
+/* ---------- FONT ---------- */
+@font-face {
+    font-family: 'Quinlliyk';
+    /* public/assets recommended for CRA/Vite dev/prod. Change if needed */
+    src: local('Quinlliyk'), url('../public/assets/QuinlliykRegular-gx3ME.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ---------- TITLE FONT (ONLY) ---------- */
+/* Keep this narrow so Quinlliyk applies only to headings/titles below */
+.title-font {
+    font-family: 'Quinlliyk', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* Let inline theme color / stroke override color if present */
+}
+
+/* HERO / PAGE TITLE (H1) */
+.page-title {
+    composes: title-font;
+    /* large responsive hero sizing — matches your earlier clamp intent */
+    font-size: clamp(2.4rem, 6vw, 4.0rem);
+    line-height: 0.92;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    display: block;
+    color: inherit;
+    /* theme supplies the color via inline style */
+    -webkit-text-stroke: 1px transparent;
+    /* allow inline stroke override */
+    transition: transform 220ms ease, text-shadow 220ms ease;
+    /* subtle entrance/weight styles to make Day 1 feel richer */
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    padding-right: 6px;
+    padding-left: 2px;
+}
+
+/* Event titles (H3) */
+.event-title {
+    composes: title-font;
+    font-size: 1.25rem;
+    margin: 0;
+    line-height: 1;
+    color: inherit;
+    /* card sets color */
+    letter-spacing: 0.02em;
+    font-weight: 700;
+    text-transform: none;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Signoff heading (used when no programs) */
+.signoff h2 {
+    composes: title-font;
+    font-size: 1.8rem;
+    margin: 8px 0 6px;
+    color: inherit;
+}
+
+/* Provide a small decorative underline for the hero to make Day1 pop
+   You can remove or tweak -- it only affects the H1 (.page-title) */
+.page-title::after {
+    content: "";
+    display: inline-block;
+    height: 6px;
+    width: 56px;
+    margin-left: 12px;
+    margin-top: 10px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.25));
+    vertical-align: middle;
+    opacity: 0.9;
+}
+
+/* ---------- THEME FONTS (used by JSX classes) ---------- */
+/* Your JSX applies currentTheme.fontClass to various elements.
+   Keep these available so other UI text changes with theme. */
+.font-sans {
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.font-comic {
+    font-family: "Comic Neue", "Comic Sans MS", cursive, sans-serif;
+}
+
+.font-serif {
+    font-family: "Georgia", "Times New Roman", serif;
+}
+
+.font-serif-wide {
+    font-family: "Georgia", serif;
+    letter-spacing: 1.6px;
+}
+
+/* ---------- BASE LAYOUT / UTIL ---------- */
+:root {
+    --panel-bg: rgba(0, 0, 0, 0.30);
+    --panel-border: rgba(255, 255, 255, 0.08);
+    --muted: rgba(255, 255, 255, 0.75);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--ui-font, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: white;
+    background: #111;
+}
+
+/* Root wrapper that JSX sets style bgGradient on */
+.schedule-root {
+    min-height: 100vh;
+    transition: background 0.7s ease-in-out;
+    overflow: hidden;
+    padding: 28px 16px;
+}
+
+/* centered container */
+.schedule-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Dev toolbar */
+.dev-toolbar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 10px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.34);
+    color: #fff;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.dev-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.dev-input {
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    color: white;
+    border: none;
+    outline: none;
+    min-width: 260px;
+}
+
+.dev-apply {
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    border: none;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+}
+
+.dev-tip {
+    font-size: 11px;
+    opacity: 0.8;
+    margin-left: auto;
+}
+
+/* Header area */
+.schedule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 18px;
+    border-radius: 14px;
+    border: 1px solid var(--panel-border);
+    margin-bottom: 18px;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.branding {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.10);
+}
+
+.brand-label {
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 12px;
+    opacity: 0.95;
+}
+
+/* subtitle under hero */
+.page-sub {
+    color: rgba(255, 255, 255, 0.86);
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Date selector */
+.date-selector {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.date-btn {
+    min-width: 64px;
+    height: 64px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.06);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 6px;
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.date-btn .date-mon {
+    font-size: 11px;
+    text-transform: uppercase;
+    opacity: 0.85;
+}
+
+.date-btn .date-day {
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+.date-btn.active {
+    transform: scale(1.06);
+    background: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* main layout */
+.main-grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 20px;
+    align-items: start;
+    margin-top: 8px;
+}
+
+@media (max-width: 900px) {
+    .main-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .date-selector {
+        overflow: auto;
+    }
+}
+
+/* sidebar */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cat-btn {
+    text-align: left;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: none;
+    background: rgba(0, 0, 0, 0.18);
+    color: rgba(255, 255, 255, 0.92);
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cat-btn:hover {
+    background: rgba(0, 0, 0, 0.26);
+}
+
+.cat-btn.active {
+    background: rgba(255, 255, 255, 0.10);
+    transform: scale(1.02);
+}
+
+/* content area */
+.content {
+    min-height: 500px;
+    background: transparent;
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    background: var(--panel-bg);
+    color: white;
+    border: 1px solid var(--panel-border);
+}
+
+.on-air {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: monospace;
+    font-size: 13px;
+    text-transform: uppercase;
+    opacity: 0.95;
+}
+
+.live-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.7);
+    animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.list-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Signoff / empty state */
+.signoff {
+    text-align: center;
+    padding: 34px;
+    border-radius: 12px;
+    border: 2px dashed rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.95);
+    background: rgba(0, 0, 0, 0.12);
+}
+
+.signoff .tv-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 10px;
+}
+
+/* Event card */
+.event-card {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .25s ease, background .25s ease;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.32);
+}
+
+/* card interiors */
+.card-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.card-right {
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+/* time row */
+.time-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+}
+
+.small-icon {
+    width: 16px;
+    height: 16px;
+    opacity: 0.95;
+}
+
+.time-text {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+/* event title already set above (.event-title) */
+
+/* venue */
+.venue-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 14px;
+}
+
+/* code text */
+.code-wrap {
+    text-align: center;
+}
+
+.code-text {
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* Now badge styles */
+.now-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 10px;
+    font-weight: 800;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.now-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #ff9b9b, #ff2b2b 60%);
+    box-shadow: 0 0 10px rgba(255, 43, 43, 0.9), 0 0 30px rgba(255, 43, 43, 0.25);
+    position: relative;
+    animation: now-blink 0.6s infinite;
+}
+
+.now-dot::after {
+    content: '';
+    position: absolute;
+    left: -8px;
+    top: -8px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    filter: blur(6px);
+    background: radial-gradient(circle, rgba(255, 43, 43, 0.14), rgba(255, 43, 43, 0));
+    pointer-events: none;
+}
+
+.now-text {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+@keyframes now-blink {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.45);
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* lucide icon sizing */
+.icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* small utility */
+.sep {
+    margin: 0 8px;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+/* responsive tweaks */
+@media (max-width: 640px) {
+    .date-btn {
+        min-width: 56px;
+        height: 56px;
+    }
+
+    .page-title {
+        font-size: clamp(1.8rem, 8vw, 2.6rem);
+    }
+
+    .card-right {
+        width: 110px;
+    }
+
+    .event-title {
+        font-size: 1rem;
+    }
+}

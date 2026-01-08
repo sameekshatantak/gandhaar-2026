@@ -123,6 +123,10 @@ export default function Events() {
         <div className="screen-container">
           <div className="crt-overlay" />
 
+          <button onClick={() => navigate(-1)} className="back-btn">
+            ← BACK
+          </button>
+
           {/* TOP CENTER BOX */}
           <div className="tv-center-box tv-top-box">
             <span className="tv-title">EVENT CHANNEL</span>

@@ -6,10 +6,10 @@ const AboutUs = () => {
     const [isLiked, setIsLiked] = useState(false);
     const [isVideoOpen, setIsVideoOpen] = useState(false);
     const [showToast, setShowToast] = useState(false);
-    const videoUrl = "https://www.youtube.com/embed/9P153-soZH0";
+    const videoUrl = "https://www.youtube.com/embed/fAucu6WXHI0";
 
     const shareFest = () => {
-        const shareLink = "https://youtu.be/9P153-soZH0";
+        const shareLink = "https://youtu.be/fAucu6WXHI0?si=zOiif4MgkgHAvdZn";
         navigator.clipboard.writeText(shareLink).then(() => {
             setShowToast(true);
             setTimeout(() => setShowToast(false), 3000);

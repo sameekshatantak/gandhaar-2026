@@ -8,19 +8,19 @@ export default function Navbar() {
 
   // Helper to handle smooth scrolling to sections
   const navigate = useNavigate();
-const location = useLocation();
+  const location = useLocation();
 
-const scrollTo = (id) => {
-  // If not on home page, go there first
-  if (location.pathname !== "/") {
-    navigate("/", { state: { scrollTo: id } });
-  } else {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  }
+  const scrollTo = (id) => {
+    // If not on home page, go there first
+    if (location.pathname !== "/") {
+      navigate("/", { state: { scrollTo: id } });
+    } else {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
 
-  if (window.innerWidth <= 768) setIsOpen(false);
-};
+    if (window.innerWidth <= 768) setIsOpen(false);
+  };
 
 
   // 3D Tilt Logic from your code
@@ -281,7 +281,7 @@ const scrollTo = (id) => {
         /* ---------- MOBILE POWER TOGGLE ---------- */
         .mobile-power-toggle {
   position: fixed;
-  bottom: 20px;
+  bottom: 40px;
   right: 20px;              /* 👈 move to right */
   width: 60px;
   height: 60px;
@@ -348,7 +348,7 @@ const scrollTo = (id) => {
         <div className="body-main-border">
           <div className="body-main" ref={bodyMainRef}>
             <div className="container-btns-top">
-              <div style={{width: '38px'}}></div> {/* Spacer */}
+              <div style={{ width: '38px' }}></div> {/* Spacer */}
               <div className="mic-outer"><div className="mic-inner" /></div>
               <button className="btn-power" onClick={() => setIsOpen(false)}>x</button>
             </div>
@@ -359,13 +359,13 @@ const scrollTo = (id) => {
                 <div className="dot dot-right" />
                 <div className="dot dot-bottom" />
                 <div className="dot dot-left" />
-                <div className="btn-main-inner" onClick={() => scrollTo('home')}>Home</div>
+                <div className="btn-main-inner" onClick={() => scrollTo('header')}>Home</div>
               </div>
             </div>
 
             <div className="container-btns-bottom">
               <div className="btns-col-left">
-                <button className="btn-basic" onClick={() => scrollTo('events')}>Events</button>
+                <button className="btn-basic" onClick={() => scrollTo('homeevent')}>Events</button>
                 <button className="btn-basic" onClick={() => scrollTo('schedule')}>Schedule</button>
                 <button className="btn-basic" onClick={() => scrollTo('about')}>About Us</button>
                 <button className="btn-basic" onClick={() => scrollTo('themes')}>Themes</button>
@@ -374,9 +374,9 @@ const scrollTo = (id) => {
               <div className="btns-col-right">
                 <button className="btn-basic" onClick={() => scrollTo('lineup')}>Star Lineup</button>
                 <div className="btn-volume">
-                  <div style={{cursor: 'pointer'}}>＋</div>
-                  <div style={{fontSize: '9px'}}>VOL</div>
-                  <div style={{cursor: 'pointer'}}>－</div>
+                  <div style={{ cursor: 'pointer' }}>＋</div>
+                  <div style={{ fontSize: '9px' }}>VOL</div>
+                  <div style={{ cursor: 'pointer' }}>－</div>
                 </div>
                 <button className="btn-basic" onClick={() => scrollTo('team')}>Meet Team</button>
               </div>
