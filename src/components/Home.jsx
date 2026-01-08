@@ -21,6 +21,9 @@ import Navbar from "./Navbar";
 import StarLineUp from "./StarLineUp";
 import StarReveal from "./StarReveal";
 
+let GLOBAL_MUTED = false;
+
+
 function Home() {
   const location = useLocation();
 
