@@ -55,6 +55,7 @@
   font-family: 'Quinlliyk', sans-serif;
   font-size: clamp(4rem, 8vw, 6rem);
   margin: 0;
+  text-align: center;
 }
 
 .gold-subtitle {
@@ -62,6 +63,7 @@
   color: #f0f0f0;
   font-size: 1.5rem;
   opacity: 0.8;
+  text-align: center;
 }
 
 .hidden-layer {

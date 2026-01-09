@@ -193,13 +193,7 @@ const GandhaarTheme = () => {
       </div>
       <div className="click-hint">Hit VOL, hear the show!</div>
 
-      <div className="set-top-box">
-        <div className="stb-lights">
-          <span className="stb-light red"></span>
-          <span className="stb-light yellow"></span>
-        </div>
-        <Link to="/events" className="stb-cta">CTV</Link>
-      </div>
+
     </div>
   );
 };

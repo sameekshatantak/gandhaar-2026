@@ -87,7 +87,7 @@ const EventPage = () => {
           <div className="crt-overlay"></div>
 
           <button onClick={() => navigate(-1)} className="back-btn">
-            ← BACK
+            ←
           </button>
 
           {/* 📡 EVENT BROADCAST */}

@@ -194,7 +194,7 @@ const ScratchScreen = ({ onReveal, hidden }) => {
         onTouchMove={e => scratch(...Object.values(getPos(e)))}
       />
 
-      {scratchPercentage < 5 && (
+      {scratchPercentage < 3 && (
         <div className="scratch-hint">
           <div className="scratch-hint-box">✨ Scratch to reveal</div>
         </div>

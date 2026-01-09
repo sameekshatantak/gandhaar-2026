@@ -125,7 +125,7 @@ export default function Events() {
           <div className="crt-overlay" />
 
           <button onClick={() => navigate(-1)} className="back-btn">
-            ← BACK
+            ←
           </button>
 
           {/* TOP CENTER BOX */}

@@ -385,7 +385,7 @@ export default function Navbar() {
                   <div style={{ fontSize: '9px' }}>VOL</div>
                   <div style={{ cursor: 'pointer' }}>－</div>
                 </div>
-                <button className="btn-basic" onClick={() => scrollTo('team')}>Meet Team</button>
+                <button className="btn-basic" onClick={() => scrollTo('panel')}>Meet Team</button>
               </div>
             </div>
           </div>
