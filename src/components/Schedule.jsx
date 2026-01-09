@@ -1,14 +1,14 @@
-import React, { useState, useMemo } from "react";
 import {
     Calendar,
+    Crown,
+    Film,
     MapPin,
     Play,
-    Tv,
-    Crown,
-    Zap,
-    Film,
     Sparkles,
+    Tv,
+    Zap,
 } from "lucide-react";
+import { useMemo, useState } from "react";
 import "../style/Schedule.css";
 
 /** --- CONFIG: force Asia/Kolkata (IST) offset --- */
@@ -312,7 +312,7 @@ const Schedule = () => {
             style={{ background: currentTheme.bgGradient }}
         >
             <div className="schedule-inner">
-                <DevToolbar onChange={setSimulatedNow} />
+              
 
                 <header className="schedule-header">
                     <div className="header-left">
