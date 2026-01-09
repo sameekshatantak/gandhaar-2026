@@ -282,10 +282,10 @@ export default function Navbar() {
         /* ---------- MOBILE POWER TOGGLE ---------- */
         .mobile-power-toggle {
   position: fixed;
-  bottom: 40px;
+  bottom: 60px;
   right: 20px;              /* 👈 move to right */
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background: #d32f2f;
   color: #fff;
@@ -341,7 +341,7 @@ export default function Navbar() {
 
       {/* MOBILE POWER TOGGLE */}
       {!isOpen && (
-        <button className="mobile-power-toggle" onClick={() => setIsOpen(true)}>⏻</button>
+        <button className="mobile-power-toggle" onClick={() => setIsOpen(true)}>⏻ Menu</button>
       )}
 
       {/* REMOTE CONTROL */}
@@ -366,7 +366,13 @@ export default function Navbar() {
 
             <div className="container-btns-bottom">
               <div className="btns-col-left">
-                <button className="btn-basic" onClick={() => scrollTo('homeevent')}>Events</button>
+
+                <button
+                  className="btn-basic"
+                  onClick={() => navigate('/events')}
+                >
+                  Events
+                </button>
                 <button className="btn-basic" onClick={() => scrollTo('schedule')}>Schedule</button>
                 <button className="btn-basic" onClick={() => scrollTo('about')}>About Us</button>
                 <button className="btn-basic" onClick={() => scrollTo('themes')}>Themes</button>
@@ -383,9 +389,9 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-        </div>
+        </div >
         <div className="btn-side"></div>
-      </div>
+      </div >
     </>
   );
 }

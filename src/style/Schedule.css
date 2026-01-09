@@ -560,3 +560,124 @@ body {
         font-size: 1rem;
     }
 }
+
+
+/* --- RESPONSIVE VISIBILITY --- */
+.mobile-only {
+    display: none !important;
+}
+
+@media (max-width: 900px) {
+    .desktop-only {
+        display: none !important;
+    }
+
+    .mobile-only {
+        display: block !important;
+    }
+
+    .schedule-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+
+    .main-grid {
+        grid-template-columns: 1fr;
+        margin-top: 10px;
+    }
+
+    /* Stack card elements on mobile */
+    .event-card {
+        flex-direction: row;
+        /* Keep row unless title is very long */
+        padding: 14px;
+    }
+}
+
+/* --- MOBILE DROPDOWN STYLING --- */
+.mobile-filter-bar {
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(10px);
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.filter-field label {
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 1px;
+    opacity: 0.7;
+    padding-left: 4px;
+}
+
+.select-container {
+    position: relative;
+    width: 100%;
+}
+
+.select-container select {
+    width: 100%;
+    appearance: none;
+    /* Hide default arrow */
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: white;
+    font-size: 16px;
+    /* 16px prevents iOS auto-zoom on click */
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.select-container select:focus {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Custom arrow for dropdown */
+.select-arrow {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* Option styling (Note: limited styling possible on native mobile selects) */
+.select-container select option {
+    background-color: #222;
+    color: white;
+}
+
+@media (max-width: 480px) {
+    .card-right {
+        width: 80px;
+    }
+
+    .code-text {
+        font-size: 14px;
+    }
+
+    .event-card {
+        gap: 8px;
+    }
+}

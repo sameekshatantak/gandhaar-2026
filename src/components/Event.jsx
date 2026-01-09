@@ -40,19 +40,19 @@ const EventCard = ({ event }) => {
           <div className="event-code">
             {event.id} {event.eventCode}
           </div>
-          <div className="event-title">{event.title}</div>
+          <div className="etitle">{event.title}</div>
 
           <div className="legend">
             <div className="item">
-              <span className="dot red" />
+              <span className="dott red" />
               {event.venue}
             </div>
             <div className="item">
-              <span className="dot green" />
+              <span className="dott green" />
               {event.teams}
             </div>
             <div className="item">
-              <span className="dot blue" />
+              <span className="dott blue" />
               {event.perClass}
             </div>
           </div>
@@ -71,7 +71,7 @@ const EventCard = ({ event }) => {
           </div>
 
           <button className="details-box" onClick={handleRegisterClick}>
-            <span className="dot yellow" />
+            <span className="dott yellow" />
             Register
           </button>
         </div>

@@ -130,7 +130,7 @@ body {
   left: 11px;
   right: 14px;
   bottom: 14px;
-  height: 155px;
+  height: 190px;
   background: rgba(20, 20, 20, 0.45);
   backdrop-filter: blur(14px);
   border-radius: 14px;
@@ -148,10 +148,10 @@ body {
 .event-code {
   font-family: "Roboto", sans-serif;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 20px;
 }
 
-.event-title {
+.etitle {
   font-family: "Roboto", sans-serif;
   font-size: 13px;
   opacity: 0.85;
@@ -175,7 +175,7 @@ body {
   font-size: 12px;
 }
 
-.dot {
+.dott {
   width: 8px;
   height: 8px;
   border-radius: 50%;

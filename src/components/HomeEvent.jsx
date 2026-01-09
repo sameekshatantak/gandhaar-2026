@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom'; // Added for reliable routing
 import '../style/HomeEvent.css';
 
 const HomeEvent = () => {
+    const navigate = useNavigate();
     const canvasRef = useRef(null);
     const wrapperRef = useRef(null);
     const gateRef = useRef(null);
@@ -27,7 +29,6 @@ const HomeEvent = () => {
                 this.done = false;
                 this.targetX = canvas.width * 0.72;
 
-                // Speech logic
                 const phrases = ["Let's go!", "Wait!", "Me first!", "Oof!!", "Gandhaarr", "Move!", "Registration live!", "So hyped!"];
                 this.speech = Math.random() > 0.4 ? phrases[Math.floor(Math.random() * phrases.length)] : null;
             }
@@ -53,14 +54,17 @@ const HomeEvent = () => {
                 ctx.beginPath(); ctx.moveTo(this.x, this.y + 25); ctx.lineTo(this.x - 7 + walk, this.y + 45); ctx.stroke();
                 ctx.beginPath(); ctx.moveTo(this.x, this.y + 25); ctx.lineTo(this.x + 7 - walk, this.y + 45); ctx.stroke();
 
-                // Speech Box (Original rounded rectangle style)
+                // Speech Box
                 if (this.speech) {
-                    ctx.font = " 13px Arial";
+                    ctx.font = "13px Arial";
                     const txtWidth = ctx.measureText(this.speech).width;
                     ctx.fillStyle = "white";
                     ctx.beginPath();
-                    // Using roundRect for the popup speech box
-                    ctx.roundRect(this.x - (txtWidth / 2 + 5), this.y - 35, txtWidth + 10, 18, 5);
+                    if (ctx.roundRect) {
+                        ctx.roundRect(this.x - (txtWidth / 2 + 5), this.y - 35, txtWidth + 10, 18, 5);
+                    } else {
+                        ctx.rect(this.x - (txtWidth / 2 + 5), this.y - 35, txtWidth + 10, 18);
+                    }
                     ctx.fill();
                     ctx.fillStyle = "black";
                     ctx.fillText(this.speech, this.x - (txtWidth / 2), this.y - 22);
@@ -69,13 +73,10 @@ const HomeEvent = () => {
 
             update() {
                 if (this.done) return;
-
-                // Dash Logic: Accelerate as they get closer to the gate
                 const distanceToGate = this.targetX - this.x;
                 if (distanceToGate < 200) {
-                    this.speed += 0.5; // Acceleration
+                    this.speed += 0.5;
                 }
-
                 this.x += this.speed;
 
                 if (this.x >= this.targetX) {
@@ -176,7 +177,17 @@ const HomeEvent = () => {
             ))}
 
             <div className={`cta-container ${isTransitioning ? 'at-center' : ''}`}>
-                <button className="reg-btn" onClick={() => window.location.href = '/events'}>
+                {/* onPointerDown is used for mobile reliability. 
+                    navigate() is used to prevent full page reloads.
+                */}
+                <button
+                    className="reg-btn"
+                    onPointerDown={(e) => {
+                        e.preventDefault();
+                        navigate('/events');
+                    }}
+                    style={{ touchAction: 'manipulation' }}
+                >
                     REGISTER NOW!
                 </button>
             </div>

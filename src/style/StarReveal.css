@@ -43,26 +43,27 @@
 
 
 @font-face {
-    font-family: 'Quinlliyk';
-    src: url('../assets/fonts/QuinlliykRegular-gx3ME.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Quinlliyk';
+  src: url('../assets/fonts/QuinlliykRegular-gx3ME.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* Typography */
 .gold-text {
-    color: #d4af37;
-    font-family: 'Quinlliyk', sans-serif;
-    font-size: clamp(4rem, 8vw, 6rem);
-    margin: 0;
+  color: #d4af37;
+  font-family: 'Quinlliyk', sans-serif;
+  font-size: clamp(4rem, 8vw, 6rem);
+  margin: 0;
 }
 
 .gold-subtitle {
-    font-family: 'Quinlliyk', sans-serif;
-    color: #f0f0f0;
-    font-size: 1.5rem;
-    opacity: 0.8;
+  font-family: 'Quinlliyk', sans-serif;
+  color: #f0f0f0;
+  font-size: 1.5rem;
+  opacity: 0.8;
 }
+
 .hidden-layer {
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
@@ -108,7 +109,7 @@
   right: 0;
   height: 8rem;
   pointer-events: none;
-  background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, transparent 100%);
 }
 
 /* ================================
@@ -120,7 +121,7 @@
   height: calc(220px * var(--tv-scale));
   background: linear-gradient(180deg, hsl(0, 0%, 32%) 0%, hsl(0, 0%, 26%) 50%, hsl(0, 0%, 22%) 100%);
   border-radius: 6px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), inset 0 -2px 0 rgba(0,0,0,0.3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -2px 0 rgba(0, 0, 0, 0.3);
 }
 
 /* Ridges */
@@ -171,7 +172,7 @@
   left: 5%;
   right: 40%;
   bottom: 60%;
-  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
   border-radius: 4px;
   pointer-events: none;
   z-index: 15;
@@ -182,10 +183,10 @@
   inset: 0;
   border-radius: 4px;
   box-shadow:
-    inset 0 0 60px rgba(0,0,0,0.8),
-    inset 0 0 100px rgba(0,0,0,0.5),
-    inset 0 -50px 80px rgba(0,0,0,0.3),
-    inset 0 50px 80px rgba(255,255,255,0.05);
+    inset 0 0 60px rgba(0, 0, 0, 0.8),
+    inset 0 0 100px rgba(0, 0, 0, 0.5),
+    inset 0 -50px 80px rgba(0, 0, 0, 0.3),
+    inset 0 50px 80px rgba(255, 255, 255, 0.05);
 }
 
 .scanlines {
@@ -200,13 +201,11 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0,0,0,0.15) 2px,
-    rgba(0,0,0,0.15) 4px
-  );
+  background: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.15) 2px,
+      rgba(0, 0, 0, 0.15) 4px);
 }
 
 .noise-layer {
@@ -224,7 +223,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0;           /* ✅ REMOVE padding */
+  padding: 0;
+  /* ✅ REMOVE padding */
 }
 
 .scratch-wrapper {
@@ -237,7 +237,8 @@
 .scratch-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;    /* ✅ fills screen */
+  object-fit: cover;
+  /* ✅ fills screen */
 }
 
 
@@ -249,6 +250,7 @@
 }
 
 .scratch-hint {
+  z-index: 10;
   position: absolute;
   inset: 0;
   display: flex;
@@ -279,7 +281,7 @@
   height: calc(110px * var(--tv-scale));
   background: linear-gradient(180deg, hsl(40, 30%, 55%) 0%, hsl(40, 25%, 48%) 100%);
   border-radius: 4px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -1px 0 rgba(0,0,0,0.2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 
 .tv-knob {
@@ -291,8 +293,13 @@
   border-radius: 50%;
 }
 
-.knob-1 { top: calc(14px * var(--tv-scale)); }
-.knob-2 { top: calc(60px * var(--tv-scale)); }
+.knob-1 {
+  top: calc(14px * var(--tv-scale));
+}
+
+.knob-2 {
+  top: calc(60px * var(--tv-scale));
+}
 
 .knob-indicator {
   position: absolute;
@@ -323,13 +330,11 @@
   height: calc(50px * var(--tv-scale));
   top: calc(14px * var(--tv-scale));
   left: calc(8px * var(--tv-scale));
-  background: repeating-linear-gradient(
-    0deg,
-    hsl(40, 25%, 52%) 0px,
-    hsl(40, 25%, 52%) 2px,
-    hsl(40, 20%, 42%) 2px,
-    hsl(40, 20%, 42%) 4px
-  );
+  background: repeating-linear-gradient(0deg,
+      hsl(40, 25%, 52%) 0px,
+      hsl(40, 25%, 52%) 2px,
+      hsl(40, 20%, 42%) 2px,
+      hsl(40, 20%, 42%) 4px);
   border-radius: 4px;
 }
 
@@ -370,29 +375,73 @@
    ANIMATIONS
 ================================ */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes screenFlicker {
-  0%, 100% { opacity: 1; }
-  93% { opacity: 0.8; }
-  94% { opacity: 1; }
-  96% { opacity: 0.9; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  93% {
+    opacity: 0.8;
+  }
+
+  94% {
+    opacity: 1;
+  }
+
+  96% {
+    opacity: 0.9;
+  }
 }
 
 @keyframes pulseGlow {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
+
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 @keyframes scratchHint {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  25% { transform: translate(-3px, -3px) rotate(-2deg); }
-  75% { transform: translate(3px, 3px) rotate(2deg); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  25% {
+    transform: translate(-3px, -3px) rotate(-2deg);
+  }
+
+  75% {
+    transform: translate(3px, 3px) rotate(2deg);
+  }
 }
 
 @keyframes confettiFall {
-  0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
 }

@@ -53,7 +53,7 @@ const THEMES = {
         borderColor: "rgba(0,0,0,0.1)",
         fontClass: "font-comic",
         cardStyle: {
-            background: "rgba(255,255,255,0.9)",
+            background: "rgba(0,0,0,0.30)",
             color: "#000000",
             border: "2px solid rgba(0,0,0,0.1)",
             borderRadius: "16px",

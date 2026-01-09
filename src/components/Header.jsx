@@ -7,6 +7,10 @@ import tv from '../assets/images/header/tv.png';
 import tv1 from '../assets/images/header/tv1.png';
 import word from '../assets/images/header/word.png';
 import word2 from '../assets/images/header/word2.png';
+import video1 from '../assets/videos/video1.mp4';
+import video2 from '../assets/videos/video2.mp4';
+import video3 from '../assets/videos/video3.mp4';
+import video4 from '../assets/videos/video4.mp4';
 
 
 export default function Home() {
@@ -40,10 +44,10 @@ export default function Home() {
           <img src={disk} className="disk" />
           <img src={tv1} className="tv" />
 
-          <video className="tv-video tv-video-1" src="src/assets/videos/video1.mp4" autoPlay muted loop playsInline />
-          <video className="tv-video tv-video-2" src="src/assets/videos/video2.mp4" autoPlay muted loop playsInline />
-          <video className="tv-video tv-video-3" src="src/assets/videos/video3.mp4" autoPlay muted loop playsInline />
-          <video className="tv-video tv-video-4" src="src/assets/videos/video4.mp4" autoPlay muted loop playsInline />
+          <video className="tv-video tv-video-1" src={video1} autoPlay muted loop playsInline />
+          <video className="tv-video tv-video-2" src={video2} autoPlay muted loop playsInline />
+          <video className="tv-video tv-video-3" src={video3} autoPlay muted loop playsInline />
+          <video className="tv-video tv-video-4" src={video4} autoPlay muted loop playsInline />
         </div>
       </div>
 
@@ -60,10 +64,10 @@ export default function Home() {
           <img src={disk} className="disk" />
           <img src={tv} className="tv" />
 
-          <video className="tv-video tv-video-1" src="src/assets/videos/video1.mp4" autoPlay muted loop playsInline />
-          <video className="tv-video tv-video-2" src="src/assets/videos/video2.mp4" autoPlay muted loop playsInline />
-          <video className="tv-video tv-video-3" src="src/assets/videos/video3.mp4" autoPlay muted loop playsInline />
-          <video className="tv-video tv-video-4" src="src/assets/videos/video4.mp4" autoPlay muted loop playsInline />
+          <video className="tv-video tv-video-1" src={video1} autoPlay muted loop playsInline />
+          <video className="tv-video tv-video-2" src={video2} autoPlay muted loop playsInline />
+          <video className="tv-video tv-video-3" src={video3} autoPlay muted loop playsInline />
+          <video className="tv-video tv-video-4" src={video4} autoPlay muted loop playsInline />
         </div>
       </div>
     </>
