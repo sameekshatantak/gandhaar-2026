@@ -83,6 +83,7 @@ const EventCard = ({ event }) => {
 /* ---------------- EVENTS PAGE ---------------- */
 
 export default function Events() {
+  const navigate = useNavigate();
   const [events, setEvents] = useState([]);
   const [activeDate, setActiveDate] = useState("All");
   const [loading, setLoading] = useState(true);

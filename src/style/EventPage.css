@@ -103,7 +103,7 @@ body,
 
 .event-header h1 {
   font-family: 'Quinlliyk', sans-serif;
-  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  font-size: clamp(1.5rem, 7vw, 4.5rem);
   color: var(--accent);
   letter-spacing: 4px;
   margin: 10px 0;
